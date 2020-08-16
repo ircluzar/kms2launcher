@@ -1,0 +1,6 @@
+You need a php compatible server that supports reading file attributes.
+
+The php files included mostly use the file system metadata and structure to work.
+There is no actual database involved in the process.
+
+Web value overrides are to be put at the same level as the patchlist.php file

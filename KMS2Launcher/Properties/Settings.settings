@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GameStarter.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DesktopBounds" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0, 0, -1, -1</Value>
+    </Setting>
+    <Setting Name="IsMaximised" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StartMode" Type="GameStarter.StartMode" Scope="User">
+      <Value Profile="(Default)">Launch</Value>
+    </Setting>
+    <Setting Name="Architecture" Type="GameStarter.Architecture" Scope="User">
+      <Value Profile="(Default)">x64</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,72 @@
+The KMS2 Launcher server is entirely database-less and supports dynamic variable overrides from server-side.
+
+
+---------------------------------------------------
+Modifying the program's behavior without redeploy
+---------------------------------------------------
+
+In many instances, program variables can be overridden by dropping a text file in the server root folder (patch folder)
+
+Here's the variables you can override if needed, otherwise they will resolve default hardcoded strings:
+Basically, if you want to override the Online Guide variable, create a GAME_GUIDE.txt file and place it so
+that it resolves to https://maplestory2.info/patch/GAME_GUIDE.txt
+
+GAME_GUIDE
+override file: GAME_GUIDE.txt
+contains: url to the online guide
+defaults to: http://bit.ly/kms2download
+
+INSTALLER_URL
+override file: INSTALLER_URL
+contains: url to nexon's maple story installer
+defaults to: http://maplestory2.dn.nexoncdn.co.kr/fullinst/fullinst.exe
+
+DISCORD_LINK
+override file: DISCORD_LINK
+contains: url to dns forward to discord server invite
+defaults to: http://discord.maplestory2.info
+
+
+TRANSLATE_LINK
+override file: TRANSLATE_LINK
+contains: url to dns forward to MS2 translation project
+defaults to: http://translate.maplestory2.info
+
+
+GOOGLE_FONT
+override file: GOOGLE_FONT
+contains: url google's Noto Sans KR font page
+defaults to: https://fonts.google.com/specimen/Noto+Sans+KR
+
+
+
+---------------------------------------------------
+Making/Modifying a patch package
+---------------------------------------------------
+
+Patch packages have to sit in subfolders of the patch root folder.
+In order to work properly, a patch folder has to:
+- Not contain any spaces in the folder name
+- Have a pack.zip file in the folder
+- Have a description.txt file in the folder
+- Have the untouched patchdate.php file in the folder
+- Optionally have a blank index.php but that's just for security.
+
+the pack.zip files must contain the destination files in a file structure that mirrors the game folder structure.
+
+Example:
+KMS2 is installed at C:\Nexon\MapleStory2
+You want to replace files at C:\Nexon\MapleStory2\Data\Sounds
+
+Then, your zip file must contain a Data folder, which contains a Sounds folder, 
+and that folder will contain the destination files.
+
+Files that already exist will be overwritten with files from the patch. No warning is thrown.
+
+
+If you want to update a package, you can directly open the pack.zip file in 7zip and replace/delete
+the files inside the package directly.
+
+There is nothing you have to do to tell the Launcher that the package has been updated. It will just figure it out.
+The launcher keeps track of the modified date of the patches that were installs and fetches
+the current modified date from the server via patchdate.php
