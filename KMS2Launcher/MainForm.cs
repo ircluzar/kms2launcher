@@ -533,7 +533,7 @@ namespace KMS2Launcher
 
         private void btnGithub_Click(object sender, EventArgs e)
         {
-            string githubUrl = LauncherSettings.GetWebValue(LauncherSettings.GAME_GUIDE);
+            string githubUrl = LauncherSettings.GetWebValue(LauncherSettings.GITHUB_REPO);
 
             if (string.IsNullOrEmpty(githubUrl))
             {
