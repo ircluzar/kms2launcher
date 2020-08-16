@@ -115,6 +115,9 @@
   <ItemGroup>
     <Content Include="kms2launcher_icon_fatter_outline 256x256.ico" />
     <Content Include="kms2launcher_icon_small.ico" />
+    <None Include="Resources\back_whiter.png" />
+    <None Include="Resources\back.png" />
+    <None Include="Resources\back_with_border.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

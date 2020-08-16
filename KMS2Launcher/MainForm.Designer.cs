@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnTranslation = new System.Windows.Forms.Button();
             this.btnDiscord = new System.Windows.Forms.Button();
@@ -66,7 +67,6 @@
             this.tbGameDirectory = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -91,71 +91,97 @@
             this.tabControl.TabIndex = 0;
             this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(876, 435);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Launch";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.BackgroundImage = global::KMS2Launcher.Properties.Resources.back_whiter;
+            this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tabPage1.Controls.Add(this.btnTranslation);
             this.tabPage1.Controls.Add(this.btnDiscord);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.btnGuide);
+            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(876, 435);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Welcome";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnTranslation
             // 
-            this.btnTranslation.Location = new System.Drawing.Point(10, 220);
+            this.btnTranslation.BackColor = System.Drawing.SystemColors.Control;
+            this.btnTranslation.FlatAppearance.BorderSize = 0;
+            this.btnTranslation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTranslation.Location = new System.Drawing.Point(13, 298);
             this.btnTranslation.Name = "btnTranslation";
-            this.btnTranslation.Size = new System.Drawing.Size(200, 40);
+            this.btnTranslation.Size = new System.Drawing.Size(275, 40);
             this.btnTranslation.TabIndex = 5;
             this.btnTranslation.Text = "MapleStory 2 Translation project";
-            this.btnTranslation.UseVisualStyleBackColor = true;
+            this.btnTranslation.UseVisualStyleBackColor = false;
             this.btnTranslation.Click += new System.EventHandler(this.btnTranslation_Click);
             // 
             // btnDiscord
             // 
-            this.btnDiscord.Location = new System.Drawing.Point(10, 174);
+            this.btnDiscord.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDiscord.FlatAppearance.BorderSize = 0;
+            this.btnDiscord.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDiscord.Location = new System.Drawing.Point(13, 252);
             this.btnDiscord.Name = "btnDiscord";
-            this.btnDiscord.Size = new System.Drawing.Size(200, 40);
+            this.btnDiscord.Size = new System.Drawing.Size(275, 40);
             this.btnDiscord.TabIndex = 4;
             this.btnDiscord.Text = "Korean MapleStory 2 Discord";
-            this.btnDiscord.UseVisualStyleBackColor = true;
+            this.btnDiscord.UseVisualStyleBackColor = false;
             this.btnDiscord.Click += new System.EventHandler(this.btnDiscord_Click);
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(10, 60);
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(10, 69);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(411, 64);
+            this.label4.Size = new System.Drawing.Size(668, 141);
             this.label4.TabIndex = 3;
             this.label4.Text = resources.GetString("label4.Text");
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(10, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(251, 24);
+            this.label3.Size = new System.Drawing.Size(387, 40);
             this.label3.TabIndex = 2;
             this.label3.Text = "Welcome to KMS2 Launcher";
             // 
             // btnGuide
             // 
-            this.btnGuide.Location = new System.Drawing.Point(10, 128);
+            this.btnGuide.BackColor = System.Drawing.SystemColors.Control;
+            this.btnGuide.FlatAppearance.BorderSize = 0;
+            this.btnGuide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuide.Location = new System.Drawing.Point(13, 206);
             this.btnGuide.Name = "btnGuide";
-            this.btnGuide.Size = new System.Drawing.Size(200, 40);
+            this.btnGuide.Size = new System.Drawing.Size(275, 40);
             this.btnGuide.TabIndex = 0;
             this.btnGuide.Text = "Online Guide";
-            this.btnGuide.UseVisualStyleBackColor = true;
+            this.btnGuide.UseVisualStyleBackColor = false;
             this.btnGuide.Click += new System.EventHandler(this.btnGuide_Click);
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.BackgroundImage = global::KMS2Launcher.Properties.Resources.back_whiter;
             this.tabPage2.Controls.Add(this.pictureBox1);
             this.tabPage2.Controls.Add(this.btnOpenGuide2);
             this.tabPage2.Controls.Add(this.label2);
@@ -167,23 +193,25 @@
             this.tabPage2.Size = new System.Drawing.Size(876, 435);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Game Install";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::KMS2Launcher.Properties.Resources.installer;
-            this.pictureBox1.Location = new System.Drawing.Point(315, 16);
+            this.pictureBox1.Location = new System.Drawing.Point(380, 138);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(536, 318);
+            this.pictureBox1.Size = new System.Drawing.Size(475, 277);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
             // btnOpenGuide2
             // 
-            this.btnOpenGuide2.Location = new System.Drawing.Point(10, 174);
+            this.btnOpenGuide2.FlatAppearance.BorderSize = 0;
+            this.btnOpenGuide2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenGuide2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnOpenGuide2.Location = new System.Drawing.Point(13, 252);
             this.btnOpenGuide2.Name = "btnOpenGuide2";
-            this.btnOpenGuide2.Size = new System.Drawing.Size(200, 40);
+            this.btnOpenGuide2.Size = new System.Drawing.Size(275, 40);
             this.btnOpenGuide2.TabIndex = 3;
             this.btnOpenGuide2.Text = "Online Guide";
             this.btnOpenGuide2.UseVisualStyleBackColor = true;
@@ -191,9 +219,11 @@
             // 
             // label2
             // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.label2.Location = new System.Drawing.Point(10, 60);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(300, 48);
+            this.label2.Size = new System.Drawing.Size(346, 129);
             this.label2.TabIndex = 2;
             this.label2.Text = "Click the button below to download and execute the game installer. If this doesn\'" +
     "t work, follow the guide steps for installing the game.";
@@ -201,18 +231,22 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(10, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(201, 24);
+            this.label1.Size = new System.Drawing.Size(329, 40);
             this.label1.TabIndex = 1;
             this.label1.Text = "Installing Maple Story 2";
             // 
             // btnDownloadInstall
             // 
-            this.btnDownloadInstall.Location = new System.Drawing.Point(10, 128);
+            this.btnDownloadInstall.FlatAppearance.BorderSize = 0;
+            this.btnDownloadInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDownloadInstall.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnDownloadInstall.Location = new System.Drawing.Point(13, 206);
             this.btnDownloadInstall.Name = "btnDownloadInstall";
-            this.btnDownloadInstall.Size = new System.Drawing.Size(200, 40);
+            this.btnDownloadInstall.Size = new System.Drawing.Size(275, 40);
             this.btnDownloadInstall.TabIndex = 0;
             this.btnDownloadInstall.Text = "Download and Start Installer";
             this.btnDownloadInstall.UseVisualStyleBackColor = true;
@@ -220,6 +254,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.BackgroundImage = global::KMS2Launcher.Properties.Resources.back_whiter;
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Controls.Add(this.groupBox2);
@@ -231,6 +266,7 @@
             this.tabPage3.Controls.Add(this.tbGameDirectory);
             this.tabPage3.Controls.Add(this.label6);
             this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(876, 435);
@@ -277,72 +313,76 @@
             "95%",
             "90%",
             "85%"});
-            this.cbFontsize.Location = new System.Drawing.Point(74, 230);
+            this.cbFontsize.Location = new System.Drawing.Point(107, 237);
             this.cbFontsize.Name = "cbFontsize";
-            this.cbFontsize.Size = new System.Drawing.Size(101, 21);
+            this.cbFontsize.Size = new System.Drawing.Size(111, 29);
             this.cbFontsize.TabIndex = 21;
             this.cbFontsize.SelectedIndexChanged += new System.EventHandler(this.cbFontsize_SelectedIndexChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(16, 233);
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(42, 243);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 13);
+            this.label13.Size = new System.Drawing.Size(62, 17);
             this.label13.TabIndex = 20;
             this.label13.Text = "Font size:";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 212);
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label12.Location = new System.Drawing.Point(39, 214);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(123, 13);
+            this.label12.Size = new System.Drawing.Size(157, 19);
             this.label12.TabIndex = 19;
             this.label12.Text = "Step 3: Change font size";
             // 
             // btnSetKRFont
             // 
-            this.btnSetKRFont.Location = new System.Drawing.Point(19, 167);
+            this.btnSetKRFont.Location = new System.Drawing.Point(36, 177);
             this.btnSetKRFont.Name = "btnSetKRFont";
-            this.btnSetKRFont.Size = new System.Drawing.Size(255, 33);
+            this.btnSetKRFont.Size = new System.Drawing.Size(349, 33);
             this.btnSetKRFont.TabIndex = 18;
-            this.btnSetKRFont.Text = "Set \"Noto Sans RK\" font in fontconfig.txt file";
+            this.btnSetKRFont.Text = "Set \"Noto Sans KR\" font in fontconfig.txt file";
             this.btnSetKRFont.UseVisualStyleBackColor = true;
             this.btnSetKRFont.Click += new System.EventHandler(this.btnSetKRFont_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 151);
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(39, 159);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(212, 13);
+            this.label10.Size = new System.Drawing.Size(261, 17);
             this.label10.TabIndex = 17;
             this.label10.Text = "Step 2: Change the game font and font size";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 89);
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(40, 94);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(182, 13);
+            this.label8.Size = new System.Drawing.Size(263, 17);
             this.label8.TabIndex = 16;
-            this.label8.Text = "Step 1: Download and install this font";
+            this.label8.Text = "Step 1: Download and install this font family";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(16, 64);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(178, 13);
+            this.label7.Size = new System.Drawing.Size(279, 21);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Installing a cleaner font for the game";
+            this.label7.Text = "♦ Installing a cleaner font for the game";
             // 
             // btnGetKRFont
             // 
-            this.btnGetKRFont.Location = new System.Drawing.Point(19, 105);
+            this.btnGetKRFont.Location = new System.Drawing.Point(36, 113);
             this.btnGetKRFont.Name = "btnGetKRFont";
-            this.btnGetKRFont.Size = new System.Drawing.Size(255, 33);
+            this.btnGetKRFont.Size = new System.Drawing.Size(349, 40);
             this.btnGetKRFont.TabIndex = 14;
             this.btnGetKRFont.Text = "Get \"Noto Sans KR\" font from Google Fonts";
             this.btnGetKRFont.UseVisualStyleBackColor = true;
@@ -357,9 +397,9 @@
             "JAPANESE",
             "ENGLISH",
             "CHINESE"});
-            this.cbVoiceLanguage.Location = new System.Drawing.Point(338, 25);
+            this.cbVoiceLanguage.Location = new System.Drawing.Point(349, 25);
             this.cbVoiceLanguage.Name = "cbVoiceLanguage";
-            this.cbVoiceLanguage.Size = new System.Drawing.Size(132, 21);
+            this.cbVoiceLanguage.Size = new System.Drawing.Size(121, 29);
             this.cbVoiceLanguage.TabIndex = 13;
             this.cbVoiceLanguage.SelectedIndexChanged += new System.EventHandler(this.cbVoiceLanguage_SelectedIndexChanged);
             // 
@@ -368,9 +408,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(16, 29);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(316, 13);
+            this.label9.Size = new System.Drawing.Size(332, 21);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Change voice language (Non-korean voices require voice patch):";
+            this.label9.Text = "♦ Change voice language (Required for patch):";
             // 
             // groupBox2
             // 
@@ -384,7 +424,8 @@
             // 
             // lbPatchStatus
             // 
-            this.lbPatchStatus.Location = new System.Drawing.Point(11, 20);
+            this.lbPatchStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPatchStatus.Location = new System.Drawing.Point(11, 21);
             this.lbPatchStatus.Name = "lbPatchStatus";
             this.lbPatchStatus.Size = new System.Drawing.Size(134, 99);
             this.lbPatchStatus.TabIndex = 9;
@@ -402,7 +443,8 @@
             // 
             // lbPatchDescription
             // 
-            this.lbPatchDescription.Location = new System.Drawing.Point(11, 21);
+            this.lbPatchDescription.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPatchDescription.Location = new System.Drawing.Point(11, 23);
             this.lbPatchDescription.Name = "lbPatchDescription";
             this.lbPatchDescription.Size = new System.Drawing.Size(131, 101);
             this.lbPatchDescription.TabIndex = 9;
@@ -411,9 +453,9 @@
             // btnInstallPatch
             // 
             this.btnInstallPatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnInstallPatch.Location = new System.Drawing.Point(14, 401);
+            this.btnInstallPatch.Location = new System.Drawing.Point(14, 393);
             this.btnInstallPatch.Name = "btnInstallPatch";
-            this.btnInstallPatch.Size = new System.Drawing.Size(195, 23);
+            this.btnInstallPatch.Size = new System.Drawing.Size(195, 31);
             this.btnInstallPatch.TabIndex = 7;
             this.btnInstallPatch.Text = "Download and install patch";
             this.btnInstallPatch.UseVisualStyleBackColor = true;
@@ -423,7 +465,7 @@
             // 
             this.btnRefreshAvailablePatches.Location = new System.Drawing.Point(12, 148);
             this.btnRefreshAvailablePatches.Name = "btnRefreshAvailablePatches";
-            this.btnRefreshAvailablePatches.Size = new System.Drawing.Size(195, 23);
+            this.btnRefreshAvailablePatches.Size = new System.Drawing.Size(195, 30);
             this.btnRefreshAvailablePatches.TabIndex = 6;
             this.btnRefreshAvailablePatches.Text = "Refresh available patches";
             this.btnRefreshAvailablePatches.UseVisualStyleBackColor = true;
@@ -435,6 +477,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbPatches.FormattingEnabled = true;
             this.lbPatches.IntegralHeight = false;
+            this.lbPatches.ItemHeight = 21;
             this.lbPatches.Location = new System.Drawing.Point(14, 177);
             this.lbPatches.Name = "lbPatches";
             this.lbPatches.Size = new System.Drawing.Size(193, 217);
@@ -446,7 +489,7 @@
             this.btnBrowseGameDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowseGameDirectory.Location = new System.Drawing.Point(793, 80);
             this.btnBrowseGameDirectory.Name = "btnBrowseGameDirectory";
-            this.btnBrowseGameDirectory.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseGameDirectory.Size = new System.Drawing.Size(75, 30);
             this.btnBrowseGameDirectory.TabIndex = 4;
             this.btnBrowseGameDirectory.Text = "Browse";
             this.btnBrowseGameDirectory.UseVisualStyleBackColor = true;
@@ -459,16 +502,16 @@
             this.tbGameDirectory.Location = new System.Drawing.Point(12, 81);
             this.tbGameDirectory.Name = "tbGameDirectory";
             this.tbGameDirectory.ReadOnly = true;
-            this.tbGameDirectory.Size = new System.Drawing.Size(775, 20);
+            this.tbGameDirectory.Size = new System.Drawing.Size(775, 29);
             this.tbGameDirectory.TabIndex = 3;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 21.75F, System.Drawing.FontStyle.Bold);
             this.label6.Location = new System.Drawing.Point(10, 15);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(176, 24);
+            this.label6.Size = new System.Drawing.Size(272, 40);
             this.label6.TabIndex = 2;
             this.label6.Text = "Patches and tweaks";
             // 
@@ -477,18 +520,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(10, 60);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 13);
+            this.label5.Size = new System.Drawing.Size(122, 21);
             this.label5.TabIndex = 0;
             this.label5.Text = "Game Directory:";
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(876, 435);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Launch";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -497,7 +531,9 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.tabControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(900, 500);
             this.Name = "MainForm";
             this.Text = "kms2launcher";
