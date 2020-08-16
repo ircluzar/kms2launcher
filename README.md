@@ -6,7 +6,9 @@ This launcher simplifies the installation of KMS2 and supports downloading patch
 While the current host for files is set to maplestory2.info/patch, you can find server files and documentation in the SERVER folder
 so that a new server could be deployed if anything happenned to maplestory2.info
 
-
 # Crediting
-The "Launch" part of the Launcher is derived from Miyu's NexonGameStarter.
+
+- Art by Noli
+
+- "Launch" part of the Launcher is derived from Miyu's NexonGameStarter.
 You can check Miyu's project at https://github.com/Miyuyami/NexonGameStarter/
