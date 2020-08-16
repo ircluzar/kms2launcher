@@ -168,7 +168,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(10, 70);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(668, 141);
+            this.label4.Size = new System.Drawing.Size(755, 113);
             this.label4.TabIndex = 3;
             this.label4.Text = resources.GetString("label4.Text");
             // 
@@ -298,10 +298,10 @@
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(14, 118);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(775, 16);
+            this.label11.Size = new System.Drawing.Size(828, 16);
             this.label11.TabIndex = 16;
-            this.label11.Text = "Warning: Patches can get overridden by official game patches. you may need to red" +
-    "ownload patches when a new update rolls out.";
+            this.label11.Text = "Warning: Installed patches can get overwritten by official game patches. You may " +
+    "need to redownload patches when a new update rolls out.";
             // 
             // groupBox3
             // 
@@ -332,7 +332,7 @@
             "95%",
             "90%",
             "85%"});
-            this.cbFontsize.Location = new System.Drawing.Point(107, 237);
+            this.cbFontsize.Location = new System.Drawing.Point(107, 240);
             this.cbFontsize.Name = "cbFontsize";
             this.cbFontsize.Size = new System.Drawing.Size(111, 25);
             this.cbFontsize.TabIndex = 21;
@@ -419,7 +419,7 @@
             "JAPANESE",
             "ENGLISH",
             "CHINESE"});
-            this.cbVoiceLanguage.Location = new System.Drawing.Point(349, 25);
+            this.cbVoiceLanguage.Location = new System.Drawing.Point(349, 28);
             this.cbVoiceLanguage.Name = "cbVoiceLanguage";
             this.cbVoiceLanguage.Size = new System.Drawing.Size(121, 25);
             this.cbVoiceLanguage.TabIndex = 13;
@@ -574,7 +574,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(176, 17);
             this.label14.TabIndex = 17;
-            this.label14.Text = "2020 - Launcher Version 1.01";
+            this.label14.Text = "2020 - Launcher Version 1.02";
             // 
             // MainForm
             // 
