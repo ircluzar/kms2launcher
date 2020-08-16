@@ -530,5 +530,18 @@ namespace KMS2Launcher
         {
             cbFontsize_SelectedIndexChanged(null, null);
         }
+
+        private void btnGithub_Click(object sender, EventArgs e)
+        {
+            string githubUrl = LauncherSettings.GetWebValue(LauncherSettings.GAME_GUIDE);
+
+            if (string.IsNullOrEmpty(githubUrl))
+            {
+                MessageBox.Show("Could not fetch the github url");
+                return;
+            }
+
+            Process.Start(githubUrl);
+        }
     }
 }

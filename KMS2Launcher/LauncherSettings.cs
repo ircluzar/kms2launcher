@@ -18,6 +18,7 @@ namespace KMS2Launcher
         //setting names
         public const string PATCH_SERVER_ROOT = nameof(PATCH_SERVER_ROOT);
         public const string GAME_GUIDE = nameof(GAME_GUIDE);
+        public const string GITHUB_REPO = nameof(GITHUB_REPO);
         public const string DISCORD_LINK = nameof(DISCORD_LINK);
         public const string INSTALLER_URL = nameof(INSTALLER_URL);
         public const string LAUNCHER_TAB = nameof(LAUNCHER_TAB);
@@ -33,6 +34,8 @@ namespace KMS2Launcher
                     return "https://maplestory2.info/patch"; //This is the server url where the SERVER files have to be put in.
                 case GAME_GUIDE:
                     return "http://bit.ly/kms2download";
+                case GITHUB_REPO:
+                    return "https://github.com/ircluzar/kms2launcher";
                 case INSTALLER_URL:
                     return "http://maplestory2.dn.nexoncdn.co.kr/fullinst/fullinst.exe";
                 case DISCORD_LINK:

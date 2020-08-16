@@ -99,5 +99,15 @@ namespace KMS2Launcher.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kms2launcher_icon_fatter_outline_256x256 {
+            get {
+                object obj = ResourceManager.GetObject("kms2launcher_icon_fatter_outline 256x256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

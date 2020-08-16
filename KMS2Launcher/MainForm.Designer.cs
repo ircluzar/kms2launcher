@@ -32,6 +32,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnTranslation = new System.Windows.Forms.Button();
             this.btnDiscord = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -67,8 +68,11 @@
             this.tbGameDirectory = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnGithub = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -105,6 +109,9 @@
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.BackgroundImage = global::KMS2Launcher.Properties.Resources.back_whiter;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage1.Controls.Add(this.label14);
+            this.tabPage1.Controls.Add(this.btnGithub);
+            this.tabPage1.Controls.Add(this.pictureBox2);
             this.tabPage1.Controls.Add(this.btnTranslation);
             this.tabPage1.Controls.Add(this.btnDiscord);
             this.tabPage1.Controls.Add(this.label4);
@@ -117,6 +124,17 @@
             this.tabPage1.Size = new System.Drawing.Size(876, 435);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Welcome";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.BackgroundImage = global::KMS2Launcher.Properties.Resources.kms2launcher_icon_fatter_outline_256x256;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox2.Location = new System.Drawing.Point(546, 173);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(325, 218);
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
             // 
             // btnTranslation
             // 
@@ -148,7 +166,7 @@
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 69);
+            this.label4.Location = new System.Drawing.Point(10, 70);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(668, 141);
             this.label4.TabIndex = 3;
@@ -221,9 +239,9 @@
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.label2.Location = new System.Drawing.Point(10, 60);
+            this.label2.Location = new System.Drawing.Point(10, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(346, 129);
+            this.label2.Size = new System.Drawing.Size(346, 120);
             this.label2.TabIndex = 2;
             this.label2.Text = "Click the button below to download and execute the game installer. If this doesn\'" +
     "t work, follow the guide steps for installing the game.";
@@ -307,6 +325,7 @@
             // cbFontsize
             // 
             this.cbFontsize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFontsize.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cbFontsize.FormattingEnabled = true;
             this.cbFontsize.Items.AddRange(new object[] {
             "100%",
@@ -315,7 +334,7 @@
             "85%"});
             this.cbFontsize.Location = new System.Drawing.Point(107, 237);
             this.cbFontsize.Name = "cbFontsize";
-            this.cbFontsize.Size = new System.Drawing.Size(111, 29);
+            this.cbFontsize.Size = new System.Drawing.Size(111, 25);
             this.cbFontsize.TabIndex = 21;
             this.cbFontsize.SelectedIndexChanged += new System.EventHandler(this.cbFontsize_SelectedIndexChanged);
             // 
@@ -341,6 +360,7 @@
             // 
             // btnSetKRFont
             // 
+            this.btnSetKRFont.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnSetKRFont.Location = new System.Drawing.Point(36, 177);
             this.btnSetKRFont.Name = "btnSetKRFont";
             this.btnSetKRFont.Size = new System.Drawing.Size(349, 33);
@@ -380,6 +400,7 @@
             // 
             // btnGetKRFont
             // 
+            this.btnGetKRFont.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnGetKRFont.Location = new System.Drawing.Point(36, 113);
             this.btnGetKRFont.Name = "btnGetKRFont";
             this.btnGetKRFont.Size = new System.Drawing.Size(349, 40);
@@ -391,6 +412,7 @@
             // cbVoiceLanguage
             // 
             this.cbVoiceLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbVoiceLanguage.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.cbVoiceLanguage.FormattingEnabled = true;
             this.cbVoiceLanguage.Items.AddRange(new object[] {
             "KOREAN",
@@ -399,7 +421,7 @@
             "CHINESE"});
             this.cbVoiceLanguage.Location = new System.Drawing.Point(349, 25);
             this.cbVoiceLanguage.Name = "cbVoiceLanguage";
-            this.cbVoiceLanguage.Size = new System.Drawing.Size(121, 29);
+            this.cbVoiceLanguage.Size = new System.Drawing.Size(121, 25);
             this.cbVoiceLanguage.TabIndex = 13;
             this.cbVoiceLanguage.SelectedIndexChanged += new System.EventHandler(this.cbVoiceLanguage_SelectedIndexChanged);
             // 
@@ -453,6 +475,7 @@
             // btnInstallPatch
             // 
             this.btnInstallPatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInstallPatch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnInstallPatch.Location = new System.Drawing.Point(14, 393);
             this.btnInstallPatch.Name = "btnInstallPatch";
             this.btnInstallPatch.Size = new System.Drawing.Size(195, 31);
@@ -463,6 +486,7 @@
             // 
             // btnRefreshAvailablePatches
             // 
+            this.btnRefreshAvailablePatches.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnRefreshAvailablePatches.Location = new System.Drawing.Point(12, 148);
             this.btnRefreshAvailablePatches.Name = "btnRefreshAvailablePatches";
             this.btnRefreshAvailablePatches.Size = new System.Drawing.Size(195, 30);
@@ -475,9 +499,10 @@
             // 
             this.lbPatches.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbPatches.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.lbPatches.FormattingEnabled = true;
             this.lbPatches.IntegralHeight = false;
-            this.lbPatches.ItemHeight = 21;
+            this.lbPatches.ItemHeight = 17;
             this.lbPatches.Location = new System.Drawing.Point(14, 177);
             this.lbPatches.Name = "lbPatches";
             this.lbPatches.Size = new System.Drawing.Size(193, 217);
@@ -487,6 +512,7 @@
             // btnBrowseGameDirectory
             // 
             this.btnBrowseGameDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowseGameDirectory.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.btnBrowseGameDirectory.Location = new System.Drawing.Point(793, 80);
             this.btnBrowseGameDirectory.Name = "btnBrowseGameDirectory";
             this.btnBrowseGameDirectory.Size = new System.Drawing.Size(75, 30);
@@ -499,10 +525,11 @@
             // 
             this.tbGameDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbGameDirectory.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.tbGameDirectory.Location = new System.Drawing.Point(12, 81);
             this.tbGameDirectory.Name = "tbGameDirectory";
             this.tbGameDirectory.ReadOnly = true;
-            this.tbGameDirectory.Size = new System.Drawing.Size(775, 29);
+            this.tbGameDirectory.Size = new System.Drawing.Size(775, 25);
             this.tbGameDirectory.TabIndex = 3;
             // 
             // label6
@@ -524,6 +551,31 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Game Directory:";
             // 
+            // btnGithub
+            // 
+            this.btnGithub.BackColor = System.Drawing.SystemColors.Control;
+            this.btnGithub.FlatAppearance.BorderSize = 0;
+            this.btnGithub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGithub.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGithub.Location = new System.Drawing.Point(546, 398);
+            this.btnGithub.Name = "btnGithub";
+            this.btnGithub.Size = new System.Drawing.Size(323, 29);
+            this.btnGithub.TabIndex = 7;
+            this.btnGithub.Text = "Credits, Source Code and Launcher Updates on GitHub";
+            this.btnGithub.UseVisualStyleBackColor = false;
+            this.btnGithub.Click += new System.EventHandler(this.btnGithub_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(9, 409);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(176, 17);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "2020 - Launcher Version 1.00";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -533,7 +585,7 @@
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimizeBox = false;
+            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(900, 500);
             this.Name = "MainForm";
             this.Text = "kms2launcher";
@@ -541,6 +593,7 @@
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -594,5 +647,8 @@
         private System.Windows.Forms.ComboBox cbFontsize;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btnGithub;
+        private System.Windows.Forms.Label label14;
     }
 }
