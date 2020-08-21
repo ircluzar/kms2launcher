@@ -21,6 +21,7 @@ namespace KMS2Launcher
         public const string GITHUB_REPO = nameof(GITHUB_REPO);
         public const string DISCORD_LINK = nameof(DISCORD_LINK);
         public const string INSTALLER_URL = nameof(INSTALLER_URL);
+        public const string REMEMBER_PASSWORD = nameof(REMEMBER_PASSWORD);
         public const string LAUNCHER_TAB = nameof(LAUNCHER_TAB);
         public const string GAME_FOLDER = nameof(GAME_FOLDER);
         public const string TRANSLATE_LINK = nameof(TRANSLATE_LINK);

@@ -39,9 +39,15 @@ namespace KMS2Launcher
             { Architecture.x64, "x64" },
         };
 
+        public Timer PageLoadedTimer = new Timer();
+
         public BrowserForm()
         {
             this.InitializeComponent();
+
+            PageLoadedTimer.Interval = 500;
+            PageLoadedTimer.Tick += PageLoadedTimer_Tick;
+
 
             this.WebBrowser.Url = new Uri(Arguments.LoginRedirectUrl);
 
@@ -50,6 +56,104 @@ namespace KMS2Launcher
 
             this.ArchitectureToolStripComboBox.ComboBox.DataSource = this.StartArchitectures.Keys.ToList();
             this.ArchitectureToolStripComboBox.SelectedItem = Settings.Default.Architecture;
+
+            string pass = LauncherSettings.GetValue(LauncherSettings.REMEMBER_PASSWORD);
+
+            if (!string.IsNullOrWhiteSpace(pass))
+                tbRememberPassword.Text = pass;
+        }
+
+        private void PageLoadedTimer_Tick(object sender, EventArgs e)
+        {
+            ElementCache.Clear();
+
+            var passwordBox = WebBrowser.Document.GetElementById("txtPWD");
+
+            if (passwordBox != null)
+            {
+                PageLoadedTimer.Stop();
+
+                try
+                {
+                    if (tbRememberPassword.Text.Trim() != "")
+                    {
+                        passwordBox.Focus();
+                        passwordBox.InnerText = tbRememberPassword.Text;
+                    }
+                }
+                catch { } //eat it
+
+
+
+                try
+                {
+                    var header = GetElementsByAttribMatch("div", "className", "header");
+                    HideElements(header);
+
+                    var gnb = GetElementsByAttribMatch("div", "className", "gnbBarLeft");
+                    HideElements(header);
+
+                    var h1 = WebBrowser.Document.GetElementsByTagName("h1").Cast<HtmlElement>();
+                    HideElements(h1);
+                }
+                catch { } //eat it
+
+
+                try
+                {
+                    var capchaHeader = GetElementsByAttribMatch("p", "className", "captchaMsg");//.FirstOrDefault();
+                
+                    var idmarge = capchaHeader.FirstOrDefault().Parent.Children.Cast<HtmlElement>().FirstOrDefault(it => it.GetAttribute("className") == "id");
+
+                    if (idmarge != null)
+                        idmarge.Style = "margin-top:32px";
+
+                    HideElements(capchaHeader);
+
+                }
+                catch { } //eat it
+
+                try
+                {
+                    var labelSaveUser = GetElementsByAttribMatch("div", "className", "saveid").FirstOrDefault();
+                    labelSaveUser.Style = "top:8px";
+
+                    var actualLabel = labelSaveUser.Children.Cast<HtmlElement>().Last();
+                    actualLabel.InnerText = "Remember Nexon ID";
+                }
+                catch { } //eat it
+
+
+
+                WebBrowser.Visible = true;
+            }
+            
+
+
+        }
+
+        public void HideElements(IEnumerable<HtmlElement> elems)
+        {
+            foreach (var item in elems)
+                item.Style = "display:none";
+        }
+
+        Dictionary<string, IEnumerable<HtmlElement>> ElementCache = new Dictionary<string, IEnumerable<HtmlElement>>();
+        public IEnumerable<HtmlElement> GetElementsByAttribMatch(string elementtype, string attribname, string classname)
+        {
+            if (!ElementCache.ContainsKey(elementtype))
+                ElementCache[elementtype] = WebBrowser.Document.GetElementsByTagName(elementtype).Cast<HtmlElement>();
+
+
+            var allDivs = ElementCache[elementtype];
+            var match = allDivs.Where(it => it.GetAttribute(attribname).Contains(classname));
+            return match;
+        }
+
+        public IEnumerable<HtmlElement> GetElementsByAttribMatch(IEnumerable<HtmlElement> elements, string elementtype, string attribname, string classname)
+        {
+            var match = elements.Where(it => it.GetAttribute(attribname).Contains(classname));
+            return match;
         }
 
         private void WebBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
@@ -101,6 +205,8 @@ namespace KMS2Launcher
 
         private void LoginPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            WebBrowser.Hide();
+
             this.WebBrowser.Navigate(Arguments.LoginRedirectUrl);
         }
 
@@ -112,6 +218,22 @@ namespace KMS2Launcher
             Settings.Default.Architecture = (Architecture)this.ArchitectureToolStripComboBox.SelectedItem;
 
             Settings.Default.Save();
+        }
+
+        private void lbRememberPassword_TextChanged(object sender, EventArgs e)
+        {
+            LauncherSettings.SetValue(LauncherSettings.REMEMBER_PASSWORD, tbRememberPassword.Text);
+        }
+
+        private void btnSendPassword_Click(object sender, EventArgs e)
+        {
+            var passwordBox = WebBrowser.Document.GetElementById("txtPWD");
+            passwordBox.InnerText = tbRememberPassword.Text;
+        }
+
+        private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            PageLoadedTimer.Start();
         }
     }
 }

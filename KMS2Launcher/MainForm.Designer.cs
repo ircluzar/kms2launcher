@@ -30,8 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnGithub = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnTranslation = new System.Windows.Forms.Button();
             this.btnDiscord = new System.Windows.Forms.Button();
@@ -68,8 +69,7 @@
             this.tbGameDirectory = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnGithub = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -95,15 +95,6 @@
             this.tabControl.TabIndex = 0;
             this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl_Selected);
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(876, 435);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Launch";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
@@ -124,6 +115,31 @@
             this.tabPage1.Size = new System.Drawing.Size(876, 435);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Welcome";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(9, 409);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(176, 17);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "2020 - Launcher Version 1.03";
+            // 
+            // btnGithub
+            // 
+            this.btnGithub.BackColor = System.Drawing.SystemColors.Control;
+            this.btnGithub.FlatAppearance.BorderSize = 0;
+            this.btnGithub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGithub.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGithub.Location = new System.Drawing.Point(546, 398);
+            this.btnGithub.Name = "btnGithub";
+            this.btnGithub.Size = new System.Drawing.Size(323, 29);
+            this.btnGithub.TabIndex = 7;
+            this.btnGithub.Text = "Credits, Source Code and Launcher Updates on GitHub";
+            this.btnGithub.UseVisualStyleBackColor = false;
+            this.btnGithub.Click += new System.EventHandler(this.btnGithub_Click);
             // 
             // pictureBox2
             // 
@@ -551,30 +567,14 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Game Directory:";
             // 
-            // btnGithub
+            // tabPage4
             // 
-            this.btnGithub.BackColor = System.Drawing.SystemColors.Control;
-            this.btnGithub.FlatAppearance.BorderSize = 0;
-            this.btnGithub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGithub.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGithub.Location = new System.Drawing.Point(546, 398);
-            this.btnGithub.Name = "btnGithub";
-            this.btnGithub.Size = new System.Drawing.Size(323, 29);
-            this.btnGithub.TabIndex = 7;
-            this.btnGithub.Text = "Credits, Source Code and Launcher Updates on GitHub";
-            this.btnGithub.UseVisualStyleBackColor = false;
-            this.btnGithub.Click += new System.EventHandler(this.btnGithub_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(9, 409);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(176, 17);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "2020 - Launcher Version 1.02";
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(876, 435);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Launch";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
