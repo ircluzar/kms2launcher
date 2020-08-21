@@ -228,6 +228,7 @@ namespace KMS2Launcher
         private void btnSendPassword_Click(object sender, EventArgs e)
         {
             var passwordBox = WebBrowser.Document.GetElementById("txtPWD");
+            passwordBox.Focus();
             passwordBox.InnerText = tbRememberPassword.Text;
         }
 
