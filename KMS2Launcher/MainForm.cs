@@ -274,9 +274,13 @@ namespace KMS2Launcher
                 return;
 
             string folder = fbd.SelectedPath;
-            var files = Directory.GetFiles(folder);
-            string foundMS2 = files.FirstOrDefault(it => it.ToUpper().Contains("MAPLESTORY2.EXE"));
-            string foundNGM = files.FirstOrDefault(it => it.ToUpper().Contains("NGM.EXE"));
+            string x64Folder = Path.Combine(folder, "x64");
+
+            var rootFiles = Directory.GetFiles(folder);
+            var x64Files = Directory.GetFiles(x64Folder);
+
+            string foundMS2 = x64Files.FirstOrDefault(it => it.ToUpper().Contains("MAPLESTORY2.EXE"));
+            string foundNGM = rootFiles.FirstOrDefault(it => it.ToUpper().Contains("NGM.EXE"));
 
             if(foundMS2 == null || foundNGM == null)
             {

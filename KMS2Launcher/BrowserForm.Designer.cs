@@ -83,6 +83,7 @@
             // 
             this.ArchitectureToolStripComboBox.Name = "ArchitectureToolStripComboBox";
             this.ArchitectureToolStripComboBox.Size = new System.Drawing.Size(80, 23);
+            this.ArchitectureToolStripComboBox.Visible = false;
             // 
             // label1
             // 
