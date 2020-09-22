@@ -125,7 +125,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(176, 17);
             this.label14.TabIndex = 17;
-            this.label14.Text = "2020 - Launcher Version 1.04";
+            this.label14.Text = "2020 - Launcher Version 1.05";
             // 
             // btnGithub
             // 

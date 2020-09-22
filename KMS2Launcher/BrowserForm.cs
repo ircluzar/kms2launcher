@@ -54,9 +54,6 @@ namespace KMS2Launcher
             this.ModeToolStripComboBox.ComboBox.DataSource = this.StartModes.Keys.ToList();
             this.ModeToolStripComboBox.SelectedItem = Settings.Default.StartMode;
 
-            this.ArchitectureToolStripComboBox.ComboBox.DataSource = this.StartArchitectures.Keys.ToList();
-            this.ArchitectureToolStripComboBox.SelectedItem = Settings.Default.Architecture;
-
             string pass = LauncherSettings.GetValue(LauncherSettings.REMEMBER_PASSWORD);
 
             if (!string.IsNullOrWhiteSpace(pass))
@@ -177,7 +174,7 @@ namespace KMS2Launcher
                 Debug.WriteLine("Found A2SK");
 
                 string mode = this.StartModes[(StartMode)this.ModeToolStripComboBox.SelectedItem];
-                string architecture = this.StartArchitectures[(Architecture)this.ArchitectureToolStripComboBox.SelectedItem];
+                string architecture = this.StartArchitectures[Architecture.x64];
                 string locale = Arguments.StartLocale;
                 string launchUri = String.Format(UrlFormat, Arguments.GameId, nppString, a2skString, mode, locale, architecture);
                 string escapedUri = Uri.EscapeUriString(launchUri);
@@ -215,7 +212,7 @@ namespace KMS2Launcher
             base.OnFormClosing(e);
 
             Settings.Default.StartMode = (StartMode)this.ModeToolStripComboBox.SelectedItem;
-            Settings.Default.Architecture = (Architecture)this.ArchitectureToolStripComboBox.SelectedItem;
+            Settings.Default.Architecture = Architecture.x64;
 
             Settings.Default.Save();
         }

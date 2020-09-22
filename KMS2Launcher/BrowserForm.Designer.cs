@@ -32,7 +32,6 @@
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.LoginPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ModeToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.ArchitectureToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbRememberPassword = new System.Windows.Forms.TextBox();
             this.btnSendPassword = new System.Windows.Forms.Button();
@@ -59,8 +58,7 @@
             // 
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LoginPageToolStripMenuItem,
-            this.ModeToolStripComboBox,
-            this.ArchitectureToolStripComboBox});
+            this.ModeToolStripComboBox});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(784, 27);
@@ -78,12 +76,6 @@
             // 
             this.ModeToolStripComboBox.Name = "ModeToolStripComboBox";
             this.ModeToolStripComboBox.Size = new System.Drawing.Size(121, 23);
-            // 
-            // ArchitectureToolStripComboBox
-            // 
-            this.ArchitectureToolStripComboBox.Name = "ArchitectureToolStripComboBox";
-            this.ArchitectureToolStripComboBox.Size = new System.Drawing.Size(80, 23);
-            this.ArchitectureToolStripComboBox.Visible = false;
             // 
             // label1
             // 
@@ -155,7 +147,6 @@
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem LoginPageToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox ModeToolStripComboBox;
-        private System.Windows.Forms.ToolStripComboBox ArchitectureToolStripComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbRememberPassword;
         private System.Windows.Forms.Button btnSendPassword;
