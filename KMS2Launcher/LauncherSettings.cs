@@ -34,13 +34,13 @@ namespace KMS2Launcher
                 case PATCH_SERVER_ROOT:
                     return "https://maplestory2.info/patch"; //This is the server url where the SERVER files have to be put in.
                 case GAME_GUIDE:
-                    return "http://bit.ly/kms2download";
+                    return "https://bit.ly/kms2guide";
                 case GITHUB_REPO:
                     return "https://github.com/ircluzar/kms2launcher";
                 case INSTALLER_URL:
                     return "http://maplestory2.dn.nexoncdn.co.kr/fullinst/fullinst.exe";
                 case DISCORD_LINK:
-                    return "http://discord.maplestory2.info";
+                    return "https://bit.ly/playkms2";
                 case TRANSLATE_LINK:
                     return "http://translate.maplestory2.info";
                 case GOOGLE_FONT:
