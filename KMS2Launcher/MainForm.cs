@@ -279,10 +279,14 @@ namespace KMS2Launcher
             var rootFiles = Directory.GetFiles(folder);
             var x64Files = Directory.GetFiles(x64Folder);
 
-            string foundMS2 = x64Files.FirstOrDefault(it => it.ToUpper().Contains("MAPLESTORY2.EXE"));
-            string foundNGM = rootFiles.FirstOrDefault(it => it.ToUpper().Contains("NGM.EXE"));
+            string MS2 = x64Files.FirstOrDefault(it => it.ToUpper().Contains("MAPLESTORY2.EXE"));
+            string NGM = rootFiles.FirstOrDefault(it => it.ToUpper().Contains("NGM.EXE"));
+            string NGM64 = rootFiles.FirstOrDefault(it => it.ToUpper().Contains("NGM64.EXE"));
 
-            if(foundMS2 == null || foundNGM == null)
+            bool maplestoryLocated = !(string.IsNullOrWhiteSpace(MS2));
+            bool launcherLocated = !string.IsNullOrWhiteSpace(NGM) || !string.IsNullOrWhiteSpace(NGM64);
+
+            if (!maplestoryLocated || !launcherLocated)
             {
                 MessageBox.Show("Could not find Maplestory2 and/or the Nexon game launcher.");
                 folder = "";
