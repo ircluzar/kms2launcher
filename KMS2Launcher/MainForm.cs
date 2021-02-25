@@ -18,7 +18,7 @@ namespace KMS2Launcher
     public partial class MainForm : Form
     {
 
-        public BrowserForm bForm = null;
+        public Browser2Form bForm = null;
         public static DownloadForm dForm = null;
         public static MainForm mf;
 
@@ -176,7 +176,7 @@ namespace KMS2Launcher
             //init the launch tab only if needed to save ressources on init loading
             if(tab.Text == "Launch" && bForm == null)
             {
-                bForm = new BrowserForm();
+                bForm = new Browser2Form(Arguments.GameId);
                 bForm.TopLevel = false;
                 bForm.FormBorderStyle = FormBorderStyle.None;
                 tab.Controls.Add(bForm);
