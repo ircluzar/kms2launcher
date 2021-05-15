@@ -354,6 +354,15 @@ namespace KMS2Launcher
 
             try
             {
+                var osVerMajor = System.Environment.OSVersion.Version.Major;
+                var osVerMinor = System.Environment.OSVersion.Version.Minor;
+
+                if ((osVerMajor <= 6) && (osVerMinor < 2)) { // OS Check for Win 7 SP1 or Lower
+                    MessageBox.Show(System.Environment.OSVersion.Version.ToString());
+                    ServicePointManager.Expect100Continue = true;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                }
+               
                 WebClient wc = new WebClient();
                 string patchlist = wc.DownloadString(downloadUrl);
 
@@ -408,7 +417,6 @@ namespace KMS2Launcher
                 {
                     WebClient wc = new WebClient();
                     serverPatchDate = wc.DownloadString(patchDateUrl);
-
                 }
                 catch {} //eat it
 
