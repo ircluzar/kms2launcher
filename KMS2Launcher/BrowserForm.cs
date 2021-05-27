@@ -64,7 +64,7 @@ namespace KMS2Launcher
         {
             ElementCache.Clear();
 
-            var passwordBox = WebBrowser.Document.GetElementById("txtPWD");
+            var passwordBox = WebBrowser.Document.GetElementById("txtCPWD");
 
             if (passwordBox != null)
             {
@@ -95,7 +95,7 @@ namespace KMS2Launcher
                 }
                 catch { } //eat it
 
-
+                /* Captcha Changed on Nexon 5/26/2021, removing this functionality, no longer needed.
                 try
                 {
                     var capchaHeader = GetElementsByAttribMatch("p", "className", "captchaMsg");//.FirstOrDefault();
@@ -109,6 +109,7 @@ namespace KMS2Launcher
 
                 }
                 catch { } //eat it
+                */
 
                 try
                 {
@@ -224,7 +225,7 @@ namespace KMS2Launcher
 
         private void btnSendPassword_Click(object sender, EventArgs e)
         {
-            var passwordBox = WebBrowser.Document.GetElementById("txtPWD");
+            var passwordBox = WebBrowser.Document.GetElementById("txtCPWD");
             passwordBox.Focus();
             passwordBox.InnerText = tbRememberPassword.Text;
         }
