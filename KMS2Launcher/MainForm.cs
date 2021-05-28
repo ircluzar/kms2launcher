@@ -357,8 +357,8 @@ namespace KMS2Launcher
                 var osVerMajor = System.Environment.OSVersion.Version.Major;
                 var osVerMinor = System.Environment.OSVersion.Version.Minor;
 
-                if ((osVerMajor <= 6) && (osVerMinor < 2)) { // OS Check for Win 7 SP1 or Lower
-                    MessageBox.Show(System.Environment.OSVersion.Version.ToString());
+                if (((osVerMajor <= 6) && (osVerMinor < 2))) { // OS Check for Win 7 SP1 (NT 6.2) or Lower
+                    //MessageBox.Show(System.Environment.OSVersion.Version.ToString());
                     ServicePointManager.Expect100Continue = true;
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 }

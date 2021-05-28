@@ -25,7 +25,7 @@ namespace KMS2Launcher
             //{
             //    Arguments.LoginUrl = args[3];
             //}
-            
+
             CheckUpdateIEVersion();
 
             Arguments.GameId = "106498";
@@ -42,44 +42,51 @@ namespace KMS2Launcher
             //Reference: https://social.msdn.microsoft.com/Forums/vstudio/en-US/bc469203-cb4a-4477-a8b3-996121b424e6/webbrowser?forum=vbgeneral
 
             int VersionCode;
-            string Version = "";
-            var ieVersion = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Internet Explorer").GetValue("svcUpdateVersion");
+            string ieFullVersion = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Internet Explorer")?.GetValue("svcUpdateVersion")?.ToString();
 
-            if (ieVersion is null)
-            {
-                ieVersion = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Internet Explorer").GetValue("Version");
+            if (ieFullVersion == null)
+            {   //if couldn't fetch the version (returned null), try fetching it elsewhere
+                ieFullVersion = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Internet Explorer")?.GetValue("Version")?.ToString();
             }
 
-            if (ieVersion is object)
+            if (!string.IsNullOrEmpty(ieFullVersion))
             {
-                Version = ieVersion.ToString().Substring(0, ieVersion.ToString().IndexOf('.'));
-                switch (Version ?? "")
+                string ieMajorVersion = ieFullVersion.Substring(0, ieFullVersion.ToString().IndexOf('.'));
+                if (Int32.TryParse(ieMajorVersion, out int ieMajorNumericVersion))
                 {
-                    case "10":
-                        {
-                            VersionCode = 10001;
-                            break;
-                        }
 
-                    default:
-                        {
-                            if (Convert.ToInt32(Version) >= 11)
+                    switch (ieMajorNumericVersion)
+                    {
+                        case 10:
                             {
-                                VersionCode = 11001;
-                            }
-                            else
-                            {
-                                MessageBox.Show("IE Version not supported, must be 10 or higher.");
-                                throw new Exception("IE Version not supported, must be 10 or higher.");
+                                VersionCode = 10001;
+                                break;
                             }
 
-                            break;
-                        }
+                        default:
+                            {
+                                if (ieMajorNumericVersion >= 11)
+                                {
+                                    VersionCode = 11001;
+                                    break;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("IE Version not supported, must be 10 or higher.");
+                                    throw new Exception("IE Version not supported, must be 10 or higher.");
+                                }
+                            }
+                    }
+
+                }
+                else
+                {
+                    throw new Exception("The registry key for Internet Explorer version exists but is not in the expected format. (try updating your browser using Microsoft Download Center)");
                 }
             }
             else
             {
-                throw new Exception("Registry error");
+                throw new Exception("Unable to read Internet Explorer registry key in HKEY_CURRENT_USER (Group Policy restriction or guest user?)");
             }
 
             // Check if the right emulation is set
@@ -88,11 +95,14 @@ namespace KMS2Launcher
             string Key = @"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
 
             string CurrentSetting = Convert.ToString((Microsoft.Win32.Registry.CurrentUser.OpenSubKey(Key).GetValue(System.AppDomain.CurrentDomain.FriendlyName)));
+            int CurrentSettingNumeric = -1;
+            Int32.TryParse(CurrentSetting, out CurrentSettingNumeric);
 
-            if (CurrentSetting is null || CurrentSetting == "" || Convert.ToInt32(CurrentSetting) != VersionCode)
+            if (String.IsNullOrEmpty(CurrentSetting) || CurrentSettingNumeric != VersionCode)
             {
                 Microsoft.Win32.Registry.SetValue(Root + Key, System.AppDomain.CurrentDomain.FriendlyName, VersionCode);
             }
         }
     }
 }
+
