@@ -1,14 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Runtime.ExceptionServices;
 using System.Windows.Forms;
+using System.IO;
+using System.Net;
 
 namespace KMS2Launcher
 {
+    public static class Arguments
+    {
+        public static string GameId { get; internal set; } = "106498";
+        public static string StartLocale { get; internal set; } = "KR";
+        public static string LoginUrl { get; internal set; } = "https://clogin.nexon.com/common/clogin.aspx";
+
+        public static string LoginRedirectUrl => $"{LoginUrl}?redirect=http://game.nexon.com/{GameId}";
+    }
+
     static class LauncherSettings
     {
         public static string AppDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "KMSLauncher");
@@ -26,10 +37,24 @@ namespace KMS2Launcher
         public const string GAME_FOLDER = nameof(GAME_FOLDER);
         public const string TRANSLATE_LINK = nameof(TRANSLATE_LINK);
         public const string GOOGLE_FONT = nameof(GOOGLE_FONT);
+        public const string EXITLAG = nameof(EXITLAG);
+
+        public static void MakeSureFolderExists(string path)
+        {
+            try
+            {
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not create directory {path}\n\n{ex}");
+            }
+        }
 
         public static string GetDefault(string name)
         {
-            switch(name)
+            switch (name)
             {
                 case PATCH_SERVER_ROOT:
                     return "https://maplestory2.info/patch"; //This is the server url where the SERVER files have to be put in.
@@ -66,7 +91,7 @@ namespace KMS2Launcher
                     return defaultValue;
 
                 MessageBox.Show($"Could not fetch Web Value at {url}\n\n{ex}");
-                return null; 
+                return null;
             }
         }
 
@@ -90,7 +115,7 @@ namespace KMS2Launcher
             {
                 File.WriteAllText(tentativeFile, value);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Could not fetch saved value at {tentativeFile}\n\n{ex}");
             }
@@ -111,5 +136,88 @@ namespace KMS2Launcher
             }
         }
 
+    }
+
+
+    public static class WebBrowserExtensions
+    {
+        public static Dictionary<string, string> GetCookies(this WebBrowser webBrowser)
+        {
+            var result = new Dictionary<string, string>();
+
+            string[] cookieStrings = webBrowser.Document?.Cookie?.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (cookieStrings != null)
+            {
+                for (int i = 0; i < cookieStrings.Length; i++)
+                {
+                    string cookieString = cookieStrings[i].Trim();
+                    int index = cookieString.IndexOf('=');
+                    if (index > 0)
+                    {
+                        string key = cookieString.Substring(0, index);
+                        string value = cookieString.Substring(index + 1);
+
+                        result.Add(key, value);
+                    }
+                }
+            }
+
+            return result;
+        }
+    }
+
+
+    public static class FormSync
+    {
+        public static Form SyncObject { get; set; }
+
+        public static void FormExecute(Action a)
+        {
+            if (a == null)
+            {
+                throw new ArgumentNullException(nameof(a));
+            }
+
+            if (SyncObject.InvokeRequired)
+            {
+                SyncObject.InvokeCorrectly(new MethodInvoker(a.Invoke));
+            }
+            else
+            {
+                a.Invoke();
+            }
+        }
+
+        //https://stackoverflow.com/a/56931457
+        private static object InvokeCorrectly(this Control control, Delegate method, params object[] args)
+        {
+            Exception failure = null;
+            var result = control.Invoke(new Func<object>(() =>
+            {
+                try
+                {
+                    return method.DynamicInvoke(args);
+                }
+                catch (Exception ex)
+                {
+                    failure = ex.InnerException;
+                    return failure;
+                }
+            }));
+            if (failure != null)
+            {
+                ExceptionDispatchInfo.Capture(failure).Throw();
+            }
+            return result;
+        }
+    }
+
+    public enum TabName
+    {
+        WELCOME,
+        INSTALL,
+        PATCH,
+        LAUNCH
     }
 }

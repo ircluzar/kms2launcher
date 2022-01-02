@@ -22,7 +22,7 @@ namespace KMS2Launcher
     }
 #pragma warning restore IDE1006 // Naming Styles
 
-    public partial class BrowserForm : MyForm
+    public partial class BrowserForm : Form
     {
         private const string UrlFormat = "ngm://launch/ -dll:platform.nexon.com/NGM/Bin/NGMDll.dll:1 -locale:{4} -mode:{3} -game:{0}:0 -token:'{1}' -passarg:'null' -a2sk:'{2}' -architectureplatform:'{5}'";
 
@@ -45,10 +45,10 @@ namespace KMS2Launcher
         {
             this.InitializeComponent();
 
-            PageLoadedTimer.Interval = 500;
+            PageLoadedTimer.Interval = 300;
             PageLoadedTimer.Tick += PageLoadedTimer_Tick;
 
-
+            //Process.Start(Arguments.LoginRedirectUrl);
             this.WebBrowser.Url = new Uri(Arguments.LoginRedirectUrl);
 
             this.ModeToolStripComboBox.ComboBox.DataSource = this.StartModes.Keys.ToList();
@@ -64,8 +64,25 @@ namespace KMS2Launcher
         {
             ElementCache.Clear();
 
-            var passwordBox = WebBrowser.Document.GetElementById("txtCPWD");
+            try
+            {
+                var topbox = WebBrowser.Document.GetElementById("nexonCLogin");
+                if (topbox == null)
+                    return;
+            }
+            catch
+            {
+                return;
+            }
 
+
+
+
+
+            WebBrowser.Document.Body.Style = "background-color: #222222";
+
+           //Put Password in passwordbox
+           var passwordBox = WebBrowser.Document.GetElementById("txtCPWD");
             if (passwordBox != null)
             {
                 PageLoadedTimer.Stop();
@@ -80,53 +97,96 @@ namespace KMS2Launcher
                 }
                 catch { } //eat it
 
+            }
 
 
-                try
+
+            //Page Cleanup
+
+            try
+            {
+                var header = GetElementsByAttribMatch("div", "className", "header");
+                HideElements(header);
+
+                var gnb = GetElementsByAttribMatch("div", "className", "gnbBarLeft");
+                HideElements(header);
+
+                var h1 = WebBrowser.Document.GetElementsByTagName("h1").Cast<HtmlElement>();
+                HideElements(h1);
+
+                var forgetPass = GetElementsByAttribMatch("p", "className", "loginMenu");
+                HideElements(forgetPass);
+
+                var topbox = WebBrowser.Document.GetElementById("nexonCLogin");
+                if (topbox != null)
+                    topbox.Style = "padding-top:13px";
+
+                var capcha = GetElementsByAttribMatch("div", "className", "captchaSec");
+                foreach (var elem in capcha)
+                    elem.Style = "margin: 0 0 0px";
+
+            }
+            catch { } //eat it
+
+
+
+            //page translation
+
+            try
+            {
+
+
+                var btLogin = GetElementsByAttribMatch("div", "className", "btLogin");
+                foreach (var elem in btLogin)
                 {
-                    var header = GetElementsByAttribMatch("div", "className", "header");
-                    HideElements(header);
+                    //for some reason, the login screen REALLY doesn't like it if you touch the button's text...
+                    //elem.InnerHtml = elem.InnerHtml.Replace("넥슨ID 로그인", "Log in");
 
-                    var gnb = GetElementsByAttribMatch("div", "className", "gnbBarLeft");
-                    HideElements(header);
-
-                    var h1 = WebBrowser.Document.GetElementsByTagName("h1").Cast<HtmlElement>();
-                    HideElements(h1);
+                    elem.Style = "height: 40px";
                 }
-                catch { } //eat it
 
-                /* Captcha Changed on Nexon 5/26/2021, removing this functionality, no longer needed.
-                try
+                var btnLogin = GetElementsByAttribMatch("button", "className", "button01");
+                foreach (var elem in btnLogin)
                 {
-                    var capchaHeader = GetElementsByAttribMatch("p", "className", "captchaMsg");//.FirstOrDefault();
-                
-                    var idmarge = capchaHeader.FirstOrDefault().Parent.Children.Cast<HtmlElement>().FirstOrDefault(it => it.GetAttribute("className") == "id");
-
-                    if (idmarge != null)
-                        idmarge.Style = "margin-top:32px";
-
-                    HideElements(capchaHeader);
-
+                    elem.Style = "height: 40px";
                 }
-                catch { } //eat it
-                */
 
-                try
+            }
+            catch { } //eat it
+
+            try
+            {
+                var labelSaveUser = GetElementsByAttribMatch("div", "className", "saveid").FirstOrDefault();
+                if (labelSaveUser != null)
                 {
-                    var labelSaveUser = GetElementsByAttribMatch("div", "className", "saveid").FirstOrDefault();
                     labelSaveUser.Style = "top:8px";
 
                     var actualLabel = labelSaveUser.Children.Cast<HtmlElement>().Last();
                     actualLabel.InnerText = "Remember Nexon ID";
+                    actualLabel.Style = "color: #FFFFFF";
                 }
-                catch { } //eat it
-
-
-
-                WebBrowser.Visible = true;
             }
-            
+            catch { } //eat it
 
+
+            /* Captcha Changed on Nexon 5/26/2021, removing this functionality, no longer needed.
+            try
+            {
+                var capchaHeader = GetElementsByAttribMatch("p", "className", "captchaMsg");//.FirstOrDefault();
+
+                var idmarge = capchaHeader.FirstOrDefault().Parent.Children.Cast<HtmlElement>().FirstOrDefault(it => it.GetAttribute("className") == "id");
+
+                if (idmarge != null)
+                    idmarge.Style = "margin-top:32px";
+
+                HideElements(capchaHeader);
+
+            }
+            catch { } //eat it
+            */
+
+
+            WebBrowser.Visible = true;
 
         }
 
@@ -226,8 +286,11 @@ namespace KMS2Launcher
         private void btnSendPassword_Click(object sender, EventArgs e)
         {
             var passwordBox = WebBrowser.Document.GetElementById("txtCPWD");
-            passwordBox.Focus();
-            passwordBox.InnerText = tbRememberPassword.Text;
+            if (passwordBox != null)
+            {
+                passwordBox.Focus();
+                passwordBox.InnerText = tbRememberPassword.Text;
+            }
         }
 
         private void WebBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)

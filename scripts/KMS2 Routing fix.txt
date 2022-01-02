@@ -1,0 +1,4 @@
+route delete 0.0.0.0
+route delete 52.224.0.0
+route delete 52.192.0.0
+route add 0.0.0.0 MASK 0.0.0.0 192.168.66.1

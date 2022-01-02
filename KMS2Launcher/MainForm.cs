@@ -1,563 +1,252 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace KMS2Launcher
 {
-    public partial class MainForm : Form
-    {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.IO;
+    using System.IO.Compression;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Runtime.InteropServices;
+    using System.Threading.Tasks;
 
-        public BrowserForm bForm = null;
-        public static DownloadForm dForm = null;
-        public static MainForm mf;
+    internal partial class MainForm : Form
+    {
+        private const int WM_NCLBUTTONDOWN = 0xA1;
+        private const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        internal static MainForm mf = null;
+        internal static DownloadForm dform = null;
+
+        internal static TabName SelectedTab = TabName.WELCOME;
+
+        internal static WelcomeForm wform = null;
+        internal static InstallForm iform = null;
+        internal static PatchForm pform = null;
+        internal static LaunchForm lform = null;
+
+
+        Color UnselectedButtonColor = Color.FromArgb(32, 32, 32);
+        Color SelectedButtonColor = Color.FromArgb(64, 64, 64);
 
         public MainForm()
         {
             InitializeComponent();
 
             mf = this;
+            FormSync.SyncObject = mf;
+            RewireMouseMove();
 
-            MakeSureFolderExists(LauncherSettings.AppDir);
-            MakeSureFolderExists(LauncherSettings.TempDir);
-            MakeSureFolderExists(LauncherSettings.PatchDir);
-
-            lbPatchDescription.Text = "";
-            lbPatchStatus.Text = "";
+            ReloadPrevTabFromSettings();
         }
 
-
-        public void InvokeUI(Action a)
+        public void ReloadPrevTabFromSettings()
         {
-            this.BeginInvoke(new MethodInvoker(a));
-        }
+            //Restores the last opened tab
+            string lastTab = LauncherSettings.GetValue(LauncherSettings.LAUNCHER_TAB);
 
-        public void DownloadFile(string downloadURL, string downloadedFile, string extractDirectory)
-        {
-            MainForm.dForm = new DownloadForm(downloadURL, downloadedFile, extractDirectory);
-
-
-            MainForm.dForm.TopLevel = false;
-            MainForm.dForm.Location = new Point(0, 0);
-            MainForm.dForm.Dock = DockStyle.Fill;
-            this.Controls.Add(MainForm.dForm);
-            MainForm.dForm.Show();
-            MainForm.dForm.Focus();
-            MainForm.dForm.BringToFront();
-        }
-
-
-        public void DownloadComplete(string downloadedFile, string extractDirectory)
-        {
-
-            try
+            TabName tab = TabName.WELCOME;
+            if (lastTab != null)
             {
-
-                if (extractDirectory != null)
+                try
                 {
-
-                    if (!Directory.Exists(extractDirectory))
-                        Directory.CreateDirectory(extractDirectory);
-
-                    try
-                    {
-                        //System.IO.Compression.ZipFile.ExtractToDirectory(downloadedFile, extractDirectory);
-
-                        using (ZipArchive archive = ZipFile.OpenRead(downloadedFile))
-                        {
-                            foreach (var entry in archive.Entries)
-                            {
-                                var entryPath = Path.Combine(extractDirectory, entry.FullName).Replace("/", "\\");
-
-                                if (entryPath.EndsWith("\\"))
-                                {
-                                    if (!Directory.Exists(entryPath))
-                                        Directory.CreateDirectory(entryPath);
-                                }
-                                else
-                                {
-                                    entry.ExtractToFile(entryPath, true);
-                                }
-
-
-                            }
-                        }
-
-                        MessageBox.Show("Patch installed successfully");
-
-                        string patchname = lbPatches.SelectedItem.ToString();
-                        string patchDateUrl = $"{LauncherSettings.GetValue(LauncherSettings.PATCH_SERVER_ROOT)}/{patchname}/patchdate.php";
-
-                        string serverPatchDate = null;
-
-                        try
-                        {
-                            WebClient wc = new WebClient();
-                            serverPatchDate = wc.DownloadString(patchDateUrl);
-
-                        }
-                        catch { return; } //eat it
-
-                        LauncherSettings.SetValue(patchname, serverPatchDate);
-
-                        lbPatches_SelectedIndexChanged(null, null);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"An error occurred during extraction\n\n{ex}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        return;
-                    }
-
-
-                    if (File.Exists(downloadedFile))
-                        File.Delete(downloadedFile);
-
+                    tab = (TabName)Enum.Parse(typeof(TabName), lastTab);
                 }
-                else
+                catch(Exception ex)
                 {
-                    Process.Start(downloadedFile);
+                    MessageBox.Show(ex.ToString());
                 }
-
             }
-            finally
-            {
 
-
-                dForm.Close();
-                dForm = null;
-
-            }
+            SelectTab(tab);
         }
 
-
-        public void MakeSureFolderExists(string path)
+        internal void HideTopButtons()
         {
-            try
-            {
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"Could not create directory {path}\n\n{ex}");
-            }
+            btnWelcome.Visible = false;
+            btnInstall.Visible = false;
+            btnPatch.Visible = false;
+            btnLaunch.Visible = false;
         }
 
-        private void btnGuide_Click(object sender, EventArgs e)
+        internal void ShowTopButtons()
         {
-            string guideUrl = LauncherSettings.GetWebValue(LauncherSettings.GAME_GUIDE);
-
-            if(string.IsNullOrEmpty(guideUrl))
-            {
-                MessageBox.Show("Could not fetch the guide url");
-                return;
-            }
-
-            Process.Start(guideUrl);
+            btnWelcome.Visible = true;
+            btnInstall.Visible = true;
+            btnPatch.Visible = true;
+            btnLaunch.Visible = true;
         }
 
-        private void tabControl_Selected(object sender, TabControlEventArgs e)
+        public void SaveSelectedTabToSettings(TabName t)
         {
             //save last tab
-            var tab = tabControl.SelectedTab;
-            LauncherSettings.SetValue(LauncherSettings.LAUNCHER_TAB, tab.Text);
-
-            //init the launch tab only if needed to save ressources on init loading
-            if(tab.Text == "Launch" && bForm == null)
-            {
-                bForm = new BrowserForm();
-                bForm.TopLevel = false;
-                bForm.FormBorderStyle = FormBorderStyle.None;
-                tab.Controls.Add(bForm);
-                bForm.Dock = DockStyle.Fill;
-                bForm.Show();
-            }
-        }
-
-        public void KillProcess(string name)
-        {
-            //wmic is safer than taskkill but it's also async so...
-
-            ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = "wmic";
-            psi.Arguments = $"process where name='{name}' delete";
-            Process.Start(psi).WaitForExit();
-            Thread.Sleep(420);
-        }
-
-        private void btnDownloadInstall_Click(object sender, EventArgs e)
-        {
-            string downloadUrl = LauncherSettings.GetWebValue(LauncherSettings.INSTALLER_URL);
-            string filename = downloadUrl.Substring(downloadUrl.LastIndexOf('/') + 1);
-            string tempPath = Path.Combine(LauncherSettings.TempDir, filename);
-
-            KillProcess(filename);
-
-
-            /*
-            try
-            {
-                WebClient wc = new WebClient();
-                wc.DownloadFile(downloadUrl, tempPath);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"Failed to download {downloadUrl}\n\n{ex}");
-            }
-
-            try
-            {
-                Process.Start(tempPath);
-            }
-            catch { } //eat it
-            */
-
-            DownloadFile(downloadUrl, tempPath, null);
+            var tab = t.ToString();
+            LauncherSettings.SetValue(LauncherSettings.LAUNCHER_TAB, tab);
 
         }
 
-        public void LockPatchInterface()
+        public void SelectTab(TabName tab)
         {
-            btnInstallPatch.Enabled = false;
-            cbVoiceLanguage.Enabled = false;
-            btnSetKRFont.Enabled = false;
+            //performs aestethic changes and anchors form into panel
+
+            btnWelcome.BackColor = UnselectedButtonColor;
+            btnInstall.BackColor = UnselectedButtonColor;
+            btnPatch.BackColor = UnselectedButtonColor;
+            btnLaunch.BackColor = UnselectedButtonColor;
+
+            Form f = null;
+
+            switch (tab)
+            {
+                case TabName.WELCOME: 
+                    {
+                        SelectedTab = TabName.WELCOME;
+                        btnWelcome.BackColor = SelectedButtonColor;
+
+                        if(wform == null)
+                            wform = new WelcomeForm();
+
+                        f = wform;
+
+                        break; 
+                    }
+                case TabName.INSTALL: 
+                    {
+                        SelectedTab = TabName.INSTALL;
+                        btnInstall.BackColor = SelectedButtonColor;
+
+                        if (iform == null)
+                            iform = new InstallForm();
+
+                        f = iform;
+
+                        break; 
+                    }
+                case TabName.PATCH: 
+                    {
+                        SelectedTab = TabName.PATCH;
+                        btnPatch.BackColor = SelectedButtonColor;
+
+                        if (pform == null)
+                            pform = new PatchForm();
+
+                        f = pform;
+
+                        break; 
+                    }
+                case TabName.LAUNCH: 
+                    {
+                        SelectedTab = TabName.LAUNCH;
+                        btnLaunch.BackColor = SelectedButtonColor;
+
+                        if (lform == null)
+                            lform = new LaunchForm();
+
+                        f = lform;
+
+                        break; 
+                    }
+            }
+
+            SendFormToPanel(f);
+            SaveSelectedTabToSettings(tab);
         }
 
-        public void UnlockPatchInterface()
+        private void SendFormToPanel(Form f)
         {
-            btnInstallPatch.Enabled = true;
-            cbVoiceLanguage.Enabled = true;
-            btnSetKRFont.Enabled = true;
+            pnContainer.Controls.Clear();
+            f.TopLevel = false;
+            pnContainer.Controls.Add(f);
+            f.Show();
+        }
+
+        private void RewireMouseMove()
+        {
+            foreach (Control control in Controls)
+            {
+                control.MouseMove -= RedirectMouseMove;
+                control.MouseMove += RedirectMouseMove;
+            }
+
+            MouseMove -= MainForm_MouseMove;
+            MouseMove += MainForm_MouseMove;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //Restores the last opened tab
-            string lastTab = LauncherSettings.GetValue(LauncherSettings.LAUNCHER_TAB);
-            if(lastTab != null)
-            {
-                var tab = tabControl.TabPages.OfType<TabPage>().FirstOrDefault(o => o.Text == lastTab);
-                if (tab != null)
-                    tabControl.SelectedTab = tab;
-            }
-                 
-            string gameFolder = LauncherSettings.GetValue(LauncherSettings.GAME_FOLDER);
-            if (gameFolder != null)
-            {
-                tbGameDirectory.Text = gameFolder;
-                UnlockPatchInterface();
-            }
-            else
-                LockPatchInterface();
-
-            btnRefreshAvailablePatches_Click(null, null);
 
         }
 
-        private void btnBrowseGameDirectory_Click(object sender, EventArgs e)
+        private void btnQuit_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            DialogResult result = fbd.ShowDialog();
-
-            if (result != DialogResult.OK)
-                return;
-
-            string folder = fbd.SelectedPath;
-            string x64Folder = Path.Combine(folder, "x64");
-
-            var rootFiles = Directory.GetFiles(folder);
-            var x64Files = Directory.GetFiles(x64Folder);
-
-            string MS2 = x64Files.FirstOrDefault(it => it.ToUpper().Contains("MAPLESTORY2.EXE"));
-            string NGM = rootFiles.FirstOrDefault(it => it.ToUpper().Contains("NGM.EXE"));
-            string NGM64 = rootFiles.FirstOrDefault(it => it.ToUpper().Contains("NGM64.EXE"));
-
-            bool maplestoryLocated = !(string.IsNullOrWhiteSpace(MS2));
-            bool launcherLocated = !string.IsNullOrWhiteSpace(NGM) || !string.IsNullOrWhiteSpace(NGM64);
-
-            if (!maplestoryLocated || !launcherLocated)
-            {
-                MessageBox.Show("Could not find Maplestory2 and/or the Nexon game launcher.");
-                folder = "";
-                tbGameDirectory.Text = folder;
-                LauncherSettings.DeleteValue(LauncherSettings.GAME_FOLDER);
-                LockPatchInterface();
-                return;
-            }
-
-            tbGameDirectory.Text = folder;
-            LauncherSettings.SetValue(LauncherSettings.GAME_FOLDER, folder);
-            UnlockPatchInterface();
-
+            Application.Exit();
         }
 
-        private void cbVoiceLanguage_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void btnMinimize_Click(object sender, EventArgs e)
         {
-            if (cbVoiceLanguage.SelectedIndex == -1)
-                return;
-
-            string gameFolder = tbGameDirectory.Text;
-            string configPath = Path.Combine(gameFolder, "Config", "GameOption.xml");
-
-            string language = cbVoiceLanguage.SelectedItem.ToString();
-
-            int languageValue;
-
-            switch(language)
-            {
-                default:
-                case "KOREAN":
-                    languageValue = 0;
-                    break;
-                case "JAPANESE":
-                    languageValue = 1;
-                    break;
-                case "ENGLISH":
-                    languageValue = 2;
-                    break;
-                case "CHINESE":
-                    languageValue = 3;
-                    break;
-            }
-
-            var configData = File.ReadAllText(configPath);
-
-            var normalizedConfig = configData
-                .Replace("voiceIndex=\"0\"", "voiceIndex=\"$$$\"")
-                .Replace("voiceIndex=\"1\"", "voiceIndex=\"$$$\"")
-                .Replace("voiceIndex=\"2\"", "voiceIndex=\"$$$\"")
-                .Replace("voiceIndex=\"3\"", "voiceIndex=\"$$$\"");
-
-            var changedConfig = normalizedConfig.Replace("voiceIndex=\"$$$\"", $"voiceIndex=\"{languageValue}\"");
-
-            File.WriteAllText(configPath, changedConfig);
-
-            MessageBox.Show("Config changed successfully");
-            cbVoiceLanguage.SelectedIndex = -1;
+            WindowState = FormWindowState.Minimized;
         }
 
-        private void btnRefreshAvailablePatches_Click(object sender, EventArgs e)
+        private void btnQuit_MouseEnter(object sender, EventArgs e)
         {
-
-            string downloadUrl = $"{LauncherSettings.GetValue(LauncherSettings.PATCH_SERVER_ROOT)}/patchlist.php";
-
-            try
-            {
-                var osVerMajor = System.Environment.OSVersion.Version.Major;
-                var osVerMinor = System.Environment.OSVersion.Version.Minor;
-
-                if (((osVerMajor <= 6) && (osVerMinor < 2))) { // OS Check for Win 7 SP1 (NT 6.2) or Lower
-                    //MessageBox.Show(System.Environment.OSVersion.Version.ToString());
-                    ServicePointManager.Expect100Continue = true;
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                }
-               
-                WebClient wc = new WebClient();
-                string patchlist = wc.DownloadString(downloadUrl);
-
-                lbPatches.Items.Clear();
-
-                foreach (var item in patchlist.Split('|'))
-                    if (!string.IsNullOrWhiteSpace(item))
-                        lbPatches.Items.Add(item);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to list available patches\n\n{ex}");
-            }
-
+            btnQuit.BackColor = Color.FromArgb(230, 46, 76);
         }
 
-        private void lbPatches_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnQuit_MouseLeave(object sender, EventArgs e)
         {
-            if (lbPatches.SelectedIndex == -1)
-            {
-                lbPatchDescription.Text = "";
-                lbPatchStatus.Text = "";
-                return;
-            }
-                
-
-            string patchname = lbPatches.SelectedItem.ToString();
-            string patchDescriptionUrl = $"{LauncherSettings.GetValue(LauncherSettings.PATCH_SERVER_ROOT)}/{patchname}/description.txt";
-            string patchDateUrl = $"{LauncherSettings.GetValue(LauncherSettings.PATCH_SERVER_ROOT)}/{patchname}/patchdate.php";
-
-            try
-            {
-                WebClient wc = new WebClient();
-                string patchDescription = wc.DownloadString(patchDescriptionUrl);
-
-                lbPatchDescription.Text = patchDescription;
-
-            }
-            catch { } //eat it
-
-            string installedPatchDate = LauncherSettings.GetValue(patchname);
-
-            if (installedPatchDate == null)
-                lbPatchStatus.Text = "Not installed";
-            else
-            {
-
-                string serverPatchDate = null;
-
-                try
-                {
-                    WebClient wc = new WebClient();
-                    serverPatchDate = wc.DownloadString(patchDateUrl);
-                }
-                catch {} //eat it
-
-                if(serverPatchDate == null)
-                {
-                    lbPatchStatus.Text = "Error fetching server patch date";
-                }
-                else
-                {
-                    string postText = (installedPatchDate == serverPatchDate ? "" : "\n(Update available)");
-                    lbPatchStatus.Text = $"Installed patch date:\n{installedPatchDate}\n\nOnline patch date:\n{serverPatchDate}{postText}";
-                }
-
-
-
-
-            }
-
+            btnQuit.BackColor = Color.FromArgb(64, 64, 64);
         }
 
-        private void btnInstallPatch_Click(object sender, EventArgs e)
+
+        private void label5_Click(object sender, EventArgs e)
         {
-            if (lbPatches.SelectedIndex == -1)
-            {
-                return;
-            }
-
-
-            string patchname = lbPatches.SelectedItem.ToString();
-            string patchPackUrl = $"{LauncherSettings.GetValue(LauncherSettings.PATCH_SERVER_ROOT)}/{patchname}/pack.zip";
-            string tempFilename = Path.Combine(LauncherSettings.TempDir, "pack.zip");
-            string ms2Folder = tbGameDirectory.Text;
-
-            DownloadFile(patchPackUrl, tempFilename, ms2Folder);
+            MessageBox.Show($"Installer, Patcher and Launcher for Korean Maple Story 2. Source code available at https://github.com/ircluzar/kms2launcher ");
         }
 
-        private void btnDiscord_Click(object sender, EventArgs e)
+
+        private void RedirectMouseMove(object sender, MouseEventArgs e)
         {
-            string Url = LauncherSettings.GetWebValue(LauncherSettings.DISCORD_LINK);
-
-            if (string.IsNullOrEmpty(Url))
-            {
-                MessageBox.Show("Could not fetch the discord url");
-                return;
-            }
-
-            Process.Start(Url);
+            var control = (Control)sender;
+            Point screenPoint = control.PointToScreen(new Point(e.X, e.Y));
+            Point formPoint = PointToClient(screenPoint);
+            var args = new MouseEventArgs(e.Button, e.Clicks,
+                formPoint.X, formPoint.Y, e.Delta);
+            OnMouseMove(args);
         }
 
-        private void btnTranslation_Click(object sender, EventArgs e)
+        private void MainForm_MouseMove(object sender, MouseEventArgs e)
         {
-            string Url = LauncherSettings.GetWebValue(LauncherSettings.TRANSLATE_LINK);
+            Cursor.Current = Cursors.Default;
+            Point cursor = PointToClient(Cursor.Position);
 
-            if (string.IsNullOrEmpty(Url))
+            if (e.Button == MouseButtons.Left)
             {
-                MessageBox.Show("Could not fetch the translation url");
-                return;
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
-
-            Process.Start(Url);
-        }
-
-        private void btnGetKRFont_Click(object sender, EventArgs e)
-        {
-            string Url = LauncherSettings.GetWebValue(LauncherSettings.GOOGLE_FONT);
-
-            if (string.IsNullOrEmpty(Url))
-            {
-                MessageBox.Show("Could not fetch the font url");
-                return;
-            }
-
-            Process.Start(Url);
-        }
-
-        private void cbFontsize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (cbFontsize.SelectedIndex == -1)
-            //    return;
-
-            string gameFolder = tbGameDirectory.Text;
-            string configPath = Path.Combine(gameFolder, "Data", "Resource", "gfx", "fontconfig.txt");
-
-            string size = cbFontsize.SelectedItem?.ToString() ?? "";
-
-            string sizeValue;
-
-            switch (size)
-            {
-                default:
-                    sizeValue = "";
-                    break;
-                case "100%":
-                    sizeValue = " 1.00";
-                    break;
-                case "95%":
-                    sizeValue = " 0.95";
-                    break;
-                case "90%":
-                    sizeValue = " 0.90";
-                    break;
-                case "85%":
-                    sizeValue = " 0.85";
-                    break;
-            }
-
-            var configData = File.ReadAllLines(configPath);
-
-            for(int i = 0; i<configData.Length;i++)
-            {
-                string line = configData[i];
-
-                if (line.StartsWith("map \"$Font_SD_Neo_1\""))
-                    configData[i] = $"map \"$Font_SD_Neo_1\"    = \"Noto Sans KR Regular\"{sizeValue}";
-
-                if (line.StartsWith("map \"$Font_SD_Neo_3\""))
-                    configData[i] = $"map \"$Font_SD_Neo_3\"    = \"Noto Sans KR Regular\"{sizeValue}";
-            }
-
-            File.WriteAllLines(configPath, configData);
-
-            MessageBox.Show("Config changed successfully");
 
         }
 
-        private void btnSetKRFont_Click(object sender, EventArgs e)
-        {
-            cbFontsize_SelectedIndexChanged(null, null);
-        }
+        private void btnWelcome_Click(object sender, EventArgs e) => SelectTab(TabName.WELCOME);
 
-        private void btnGithub_Click(object sender, EventArgs e)
-        {
-            string githubUrl = LauncherSettings.GetWebValue(LauncherSettings.GITHUB_REPO);
+        private void btnInstall_Click(object sender, EventArgs e) => SelectTab(TabName.INSTALL);
 
-            if (string.IsNullOrEmpty(githubUrl))
-            {
-                MessageBox.Show("Could not fetch the github url");
-                return;
-            }
+        private void btnPatch_Click(object sender, EventArgs e) => SelectTab(TabName.PATCH);
 
-            Process.Start(githubUrl);
-        }
+        private void btnLaunch_Click(object sender, EventArgs e) => SelectTab(TabName.LAUNCH);
+
+
     }
 }

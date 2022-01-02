@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -9,23 +11,12 @@ namespace KMS2Launcher
         [STAThread]
         static void Main()
         {
-            //string[] args = Environment.GetCommandLineArgs();
-            //if (args.Length == 0)
-            //{
-            //    Arguments.GameId = "106498";
-            //}
-            //if (args.Length > 1)
-            //{
-            //    Arguments.GameId = args[1];
-            //}
-            //if (args.Length > 2)
-            //{
-            //    Arguments.StartLocale = args[2];
-            //} 
-            //if (args.Length > 3)
-            //{
-            //    Arguments.LoginUrl = args[3];
-            //}
+            LauncherSettings.MakeSureFolderExists(LauncherSettings.AppDir);
+
+            SwitchToExitlagIfNeeded();
+
+            LauncherSettings.MakeSureFolderExists(LauncherSettings.TempDir);
+            LauncherSettings.MakeSureFolderExists(LauncherSettings.PatchDir);
 
             CheckUpdateIEVersion();
 
@@ -34,10 +25,29 @@ namespace KMS2Launcher
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new MainForm());
+            Application.Run(new KMS2Launcher.MainForm());
+            //Application.Run(new MainForm());
             //Application.Run(new BrowserForm());
         }
 
+        public static void SwitchToExitlagIfNeeded()
+        {
+            try
+            {
+                var currentFilename = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                var currentName = new FileInfo(currentFilename).Name;
+
+                var exitlag = LauncherSettings.GetValue(LauncherSettings.EXITLAG);
+                if (exitlag == "true" && currentName != "gamestarter.exe")
+                {
+                    string gamestarterExePath = Path.Combine(LauncherSettings.AppDir, "gamestarter.exe");
+                    File.Copy(currentFilename, gamestarterExePath, true);
+                    Process.Start(gamestarterExePath);
+                    Environment.Exit(0);
+                }
+            }
+            catch { } //eat it
+        }
 
         //VERY IMPORTANT NOTE ABOUT THE CODE BELOW
         //THIS CODE GETS PICKED UP BY AVS FOR SOME REASON

@@ -63,9 +63,9 @@ namespace KMS2Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap back {
+        internal static System.Drawing.Bitmap install {
             get {
-                object obj = ResourceManager.GetObject("back", resourceCulture);
+                object obj = ResourceManager.GetObject("install", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace KMS2Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap back_whiter {
+        internal static System.Drawing.Bitmap newkms2background2 {
             get {
-                object obj = ResourceManager.GetObject("back_whiter", resourceCulture);
+                object obj = ResourceManager.GetObject("newkms2background2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,29 +83,9 @@ namespace KMS2Launcher.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap back_with_border {
+        internal static System.Drawing.Bitmap newkms2banner2 {
             get {
-                object obj = ResourceManager.GetObject("back_with_border", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap installer {
-            get {
-                object obj = ResourceManager.GetObject("installer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap kms2launcher_icon_fatter_outline_256x256 {
-            get {
-                object obj = ResourceManager.GetObject("kms2launcher_icon_fatter_outline 256x256", resourceCulture);
+                object obj = ResourceManager.GetObject("newkms2banner2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
