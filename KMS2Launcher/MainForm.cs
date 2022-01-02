@@ -65,7 +65,7 @@ namespace KMS2Launcher
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    //MessageBox.Show(ex.ToString());
                 }
             }
 
