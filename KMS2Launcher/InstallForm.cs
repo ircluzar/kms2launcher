@@ -42,6 +42,17 @@ namespace KMS2Launcher
             Thread.Sleep(420);
         }
 
+        private void btnOpenGuide2_Click(object sender, EventArgs e)
+        {
+            string guideUrl = LauncherSettings.GetWebValue(LauncherSettings.GAME_GUIDE);
 
+            if (string.IsNullOrEmpty(guideUrl))
+            {
+                MessageBox.Show("Could not fetch the guide url");
+                return;
+            }
+
+            Process.Start(guideUrl);
+        }
     }
 }

@@ -60,6 +60,7 @@
             this.btnOpenGuide2.TabStop = false;
             this.btnOpenGuide2.Text = "Online Guide";
             this.btnOpenGuide2.UseVisualStyleBackColor = false;
+            this.btnOpenGuide2.Click += new System.EventHandler(this.btnOpenGuide2_Click);
             // 
             // label2
             // 
