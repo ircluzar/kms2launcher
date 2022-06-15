@@ -41,9 +41,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbPatchDescription = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cbExitLag = new System.Windows.Forms.CheckBox();
             this.cbVoiceLanguage = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.cbExitLag = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -121,11 +121,11 @@
             this.btnRefreshAvailablePatches.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.btnRefreshAvailablePatches.FlatAppearance.BorderSize = 0;
             this.btnRefreshAvailablePatches.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRefreshAvailablePatches.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.btnRefreshAvailablePatches.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.btnRefreshAvailablePatches.ForeColor = System.Drawing.Color.White;
             this.btnRefreshAvailablePatches.Location = new System.Drawing.Point(14, 160);
             this.btnRefreshAvailablePatches.Name = "btnRefreshAvailablePatches";
-            this.btnRefreshAvailablePatches.Size = new System.Drawing.Size(195, 30);
+            this.btnRefreshAvailablePatches.Size = new System.Drawing.Size(148, 30);
             this.btnRefreshAvailablePatches.TabIndex = 19;
             this.btnRefreshAvailablePatches.TabStop = false;
             this.btnRefreshAvailablePatches.Text = "Refresh available patches";
@@ -138,14 +138,13 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbPatches.BackColor = System.Drawing.Color.Black;
             this.lbPatches.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbPatches.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.lbPatches.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.lbPatches.ForeColor = System.Drawing.Color.White;
             this.lbPatches.FormattingEnabled = true;
             this.lbPatches.IntegralHeight = false;
-            this.lbPatches.ItemHeight = 17;
             this.lbPatches.Location = new System.Drawing.Point(16, 189);
             this.lbPatches.Name = "lbPatches";
-            this.lbPatches.Size = new System.Drawing.Size(193, 113);
+            this.lbPatches.Size = new System.Drawing.Size(146, 113);
             this.lbPatches.TabIndex = 18;
             this.lbPatches.SelectedIndexChanged += new System.EventHandler(this.lbPatches_SelectedIndexChanged);
             // 
@@ -155,11 +154,11 @@
             this.btnInstallPatch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.btnInstallPatch.FlatAppearance.BorderSize = 0;
             this.btnInstallPatch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInstallPatch.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.btnInstallPatch.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.btnInstallPatch.ForeColor = System.Drawing.Color.White;
             this.btnInstallPatch.Location = new System.Drawing.Point(15, 301);
             this.btnInstallPatch.Name = "btnInstallPatch";
-            this.btnInstallPatch.Size = new System.Drawing.Size(195, 31);
+            this.btnInstallPatch.Size = new System.Drawing.Size(148, 31);
             this.btnInstallPatch.TabIndex = 20;
             this.btnInstallPatch.TabStop = false;
             this.btnInstallPatch.Text = "Download and install patch";
@@ -171,9 +170,9 @@
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.lbPatchStatus);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(221, 254);
+            this.groupBox2.Location = new System.Drawing.Point(312, 160);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(142, 78);
+            this.groupBox2.Size = new System.Drawing.Size(142, 172);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Patch Status";
@@ -181,9 +180,9 @@
             // lbPatchStatus
             // 
             this.lbPatchStatus.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPatchStatus.Location = new System.Drawing.Point(10, 21);
+            this.lbPatchStatus.Location = new System.Drawing.Point(9, 20);
             this.lbPatchStatus.Name = "lbPatchStatus";
-            this.lbPatchStatus.Size = new System.Drawing.Size(119, 44);
+            this.lbPatchStatus.Size = new System.Drawing.Size(124, 142);
             this.lbPatchStatus.TabIndex = 9;
             this.lbPatchStatus.Text = "[Patch status]";
             // 
@@ -192,9 +191,9 @@
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.lbPatchDescription);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(221, 160);
+            this.groupBox1.Location = new System.Drawing.Point(166, 160);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(145, 88);
+            this.groupBox1.Size = new System.Drawing.Size(142, 172);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Selected Patch";
@@ -202,9 +201,9 @@
             // lbPatchDescription
             // 
             this.lbPatchDescription.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPatchDescription.Location = new System.Drawing.Point(11, 23);
+            this.lbPatchDescription.Location = new System.Drawing.Point(9, 20);
             this.lbPatchDescription.Name = "lbPatchDescription";
-            this.lbPatchDescription.Size = new System.Drawing.Size(124, 50);
+            this.lbPatchDescription.Size = new System.Drawing.Size(124, 142);
             this.lbPatchDescription.TabIndex = 9;
             this.lbPatchDescription.Text = "[Patch description]";
             // 
@@ -215,12 +214,23 @@
             this.groupBox3.Controls.Add(this.cbVoiceLanguage);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(375, 160);
+            this.groupBox3.Location = new System.Drawing.Point(458, 160);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(234, 172);
+            this.groupBox3.Size = new System.Drawing.Size(153, 172);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Game tweaks";
+            // 
+            // cbExitLag
+            // 
+            this.cbExitLag.AutoSize = true;
+            this.cbExitLag.Location = new System.Drawing.Point(10, 88);
+            this.cbExitLag.Name = "cbExitLag";
+            this.cbExitLag.Size = new System.Drawing.Size(137, 17);
+            this.cbExitLag.TabIndex = 14;
+            this.cbExitLag.Text = "Exitlag vpn workaround";
+            this.cbExitLag.UseVisualStyleBackColor = true;
+            this.cbExitLag.CheckedChanged += new System.EventHandler(this.cbExitLag_CheckedChanged);
             // 
             // cbVoiceLanguage
             // 
@@ -234,7 +244,7 @@
             "JAPANESE",
             "ENGLISH",
             "CHINESE"});
-            this.cbVoiceLanguage.Location = new System.Drawing.Point(19, 65);
+            this.cbVoiceLanguage.Location = new System.Drawing.Point(10, 56);
             this.cbVoiceLanguage.Name = "cbVoiceLanguage";
             this.cbVoiceLanguage.Size = new System.Drawing.Size(134, 25);
             this.cbVoiceLanguage.TabIndex = 13;
@@ -242,22 +252,11 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(16, 29);
+            this.label9.Location = new System.Drawing.Point(7, 20);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(167, 33);
+            this.label9.Size = new System.Drawing.Size(137, 33);
             this.label9.TabIndex = 12;
             this.label9.Text = "♦ Change voice language (Required for patch):";
-            // 
-            // cbExitLag
-            // 
-            this.cbExitLag.AutoSize = true;
-            this.cbExitLag.Location = new System.Drawing.Point(19, 109);
-            this.cbExitLag.Name = "cbExitLag";
-            this.cbExitLag.Size = new System.Drawing.Size(137, 17);
-            this.cbExitLag.TabIndex = 14;
-            this.cbExitLag.Text = "Exitlag vpn workaround";
-            this.cbExitLag.UseVisualStyleBackColor = true;
-            this.cbExitLag.CheckedChanged += new System.EventHandler(this.cbExitLag_CheckedChanged);
             // 
             // PatchForm
             // 
