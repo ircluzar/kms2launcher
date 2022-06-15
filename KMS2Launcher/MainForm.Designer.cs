@@ -65,7 +65,7 @@ namespace KMS2Launcher
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(163, 18);
             this.label5.TabIndex = 132;
-            this.label5.Text = "2022 - KMS2 Launcher Version 1.10";
+            this.label5.Text = "2022 - KMS2 Launcher Version 1.1#";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
@@ -228,7 +228,7 @@ namespace KMS2Launcher
             this.btnQuit.MouseEnter += new System.EventHandler(this.btnQuit_MouseEnter);
             this.btnQuit.MouseLeave += new System.EventHandler(this.btnQuit_MouseLeave);
             // 
-            // NewMainForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -243,7 +243,7 @@ namespace KMS2Launcher
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(640, 420);
             this.MinimumSize = new System.Drawing.Size(640, 420);
-            this.Name = "NewMainForm";
+            this.Name = "MainForm";
             this.Tag = "";
             this.Text = "kms2launcher";
             this.Load += new System.EventHandler(this.MainForm_Load);
