@@ -33,6 +33,7 @@ namespace KMS2Launcher
         public const string DISCORD_LINK = nameof(DISCORD_LINK);
         public const string INSTALLER_URL = nameof(INSTALLER_URL);
         public const string REMEMBER_PASSWORD = nameof(REMEMBER_PASSWORD);
+        public const string REMEMBER_USER = nameof(REMEMBER_USER);
         public const string LAUNCHER_TAB = nameof(LAUNCHER_TAB);
         public const string GAME_FOLDER = nameof(GAME_FOLDER);
         public const string TRANSLATE_LINK = nameof(TRANSLATE_LINK);
@@ -102,7 +103,19 @@ namespace KMS2Launcher
             string defaultValue = GetDefault(name);
 
             if (File.Exists(tentativeFile))
-                return File.ReadAllText(tentativeFile);
+            {
+                if (name.Contains("REMEMBER"))
+                {
+                    var data = File.ReadAllText(tentativeFile);
+                    var newVal = Compile.Decompile32(data);
+                    return newVal;
+                }
+                else
+                {
+                    return File.ReadAllText(tentativeFile);
+                }
+                
+            }
             else
                 return defaultValue;
         }
@@ -113,7 +126,16 @@ namespace KMS2Launcher
 
             try
             {
-                File.WriteAllText(tentativeFile, value);
+                if(name.Contains("REMEMBER"))
+                {
+                    var newVal = Compile.Compile32(value);
+                    File.WriteAllText(tentativeFile, newVal);
+                }
+                else
+                {
+                    File.WriteAllText(tentativeFile, value);
+                }
+
             }
             catch (Exception ex)
             {

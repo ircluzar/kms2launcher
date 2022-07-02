@@ -109,6 +109,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compile.cs" />
     <Compile Include="InstallForm.cs">
       <SubType>Form</SubType>
     </Compile>

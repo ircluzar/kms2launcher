@@ -34,8 +34,10 @@
             this.ModeToolStripComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbRememberPassword = new System.Windows.Forms.TextBox();
-            this.btnSendPassword = new System.Windows.Forms.Button();
+            this.btnSendCredentials = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.tbRememberUser = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,11 +90,11 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(454, 8);
+            this.label1.Location = new System.Drawing.Point(560, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 13);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Remember Password :";
+            this.label1.Text = "Password :";
             // 
             // tbRememberPassword
             // 
@@ -101,30 +103,30 @@
             this.tbRememberPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbRememberPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.tbRememberPassword.ForeColor = System.Drawing.Color.White;
-            this.tbRememberPassword.Location = new System.Drawing.Point(571, 4);
+            this.tbRememberPassword.Location = new System.Drawing.Point(625, 4);
             this.tbRememberPassword.Name = "tbRememberPassword";
             this.tbRememberPassword.PasswordChar = '*';
-            this.tbRememberPassword.Size = new System.Drawing.Size(168, 19);
+            this.tbRememberPassword.Size = new System.Drawing.Size(114, 19);
             this.tbRememberPassword.TabIndex = 3;
             this.tbRememberPassword.TabStop = false;
             this.tbRememberPassword.TextChanged += new System.EventHandler(this.lbRememberPassword_TextChanged);
             // 
-            // btnSendPassword
+            // btnSendCredentials
             // 
-            this.btnSendPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSendPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSendPassword.FlatAppearance.BorderSize = 0;
-            this.btnSendPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSendPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSendPassword.ForeColor = System.Drawing.Color.White;
-            this.btnSendPassword.Location = new System.Drawing.Point(743, 3);
-            this.btnSendPassword.Name = "btnSendPassword";
-            this.btnSendPassword.Size = new System.Drawing.Size(37, 20);
-            this.btnSendPassword.TabIndex = 4;
-            this.btnSendPassword.TabStop = false;
-            this.btnSendPassword.Text = ">>";
-            this.btnSendPassword.UseVisualStyleBackColor = false;
-            this.btnSendPassword.Click += new System.EventHandler(this.btnSendPassword_Click);
+            this.btnSendCredentials.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendCredentials.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSendCredentials.FlatAppearance.BorderSize = 0;
+            this.btnSendCredentials.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendCredentials.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSendCredentials.ForeColor = System.Drawing.Color.White;
+            this.btnSendCredentials.Location = new System.Drawing.Point(743, 3);
+            this.btnSendCredentials.Name = "btnSendCredentials";
+            this.btnSendCredentials.Size = new System.Drawing.Size(37, 20);
+            this.btnSendCredentials.TabIndex = 4;
+            this.btnSendCredentials.TabStop = false;
+            this.btnSendCredentials.Text = ">>";
+            this.btnSendCredentials.UseVisualStyleBackColor = false;
+            this.btnSendCredentials.Click += new System.EventHandler(this.btnSendPassword_Click);
             // 
             // label2
             // 
@@ -137,13 +139,40 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Loading Nexon Login Page...";
             // 
+            // tbRememberUser
+            // 
+            this.tbRememberUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbRememberUser.BackColor = System.Drawing.Color.Black;
+            this.tbRememberUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbRememberUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.tbRememberUser.ForeColor = System.Drawing.Color.White;
+            this.tbRememberUser.Location = new System.Drawing.Point(438, 4);
+            this.tbRememberUser.Name = "tbRememberUser";
+            this.tbRememberUser.Size = new System.Drawing.Size(116, 19);
+            this.tbRememberUser.TabIndex = 6;
+            this.tbRememberUser.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(397, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "User :";
+            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(784, 561);
-            this.Controls.Add(this.btnSendPassword);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.tbRememberUser);
+            this.Controls.Add(this.btnSendCredentials);
             this.Controls.Add(this.tbRememberPassword);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.WebBrowser);
@@ -167,8 +196,10 @@
         private System.Windows.Forms.ToolStripComboBox ModeToolStripComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbRememberPassword;
-        private System.Windows.Forms.Button btnSendPassword;
+        private System.Windows.Forms.Button btnSendCredentials;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbRememberUser;
+        private System.Windows.Forms.Label label3;
     }
 }
 

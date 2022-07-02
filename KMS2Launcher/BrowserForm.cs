@@ -54,6 +54,11 @@ namespace KMS2Launcher
             this.ModeToolStripComboBox.ComboBox.DataSource = this.StartModes.Keys.ToList();
             this.ModeToolStripComboBox.SelectedItem = Settings.Default.StartMode;
 
+            string user = LauncherSettings.GetValue(LauncherSettings.REMEMBER_USER);
+
+            if (!string.IsNullOrWhiteSpace(user))
+                tbRememberUser.Text = user;
+
             string pass = LauncherSettings.GetValue(LauncherSettings.REMEMBER_PASSWORD);
 
             if (!string.IsNullOrWhiteSpace(pass))
@@ -99,6 +104,23 @@ namespace KMS2Launcher
 
             }
 
+            //Put User in userbox
+            var userBox = WebBrowser.Document.GetElementById("txtCNexonID");
+            if (userBox != null)
+            {
+                PageLoadedTimer.Stop();
+
+                try
+                {
+                    if (tbRememberUser.Text.Trim() != "")
+                    {
+                        userBox.Focus();
+                        userBox.InnerText = tbRememberUser.Text;
+                    }
+                }
+                catch { } //eat it
+
+            }
 
 
             //Page Cleanup
@@ -157,13 +179,16 @@ namespace KMS2Launcher
             try
             {
                 var labelSaveUser = GetElementsByAttribMatch("div", "className", "saveid").FirstOrDefault();
+
                 if (labelSaveUser != null)
                 {
-                    labelSaveUser.Style = "top:8px";
+                    HideElements(new List<HtmlElement>() { labelSaveUser });
+                    //labelSaveUser.Style = "top:8px";
 
                     var actualLabel = labelSaveUser.Children.Cast<HtmlElement>().Last();
-                    actualLabel.InnerText = "Remember Nexon ID";
-                    actualLabel.Style = "color: #FFFFFF";
+                    HideElements(new List<HtmlElement>() { actualLabel });
+                    //actualLabel.InnerText = "Remember Nexon ID";
+                    //actualLabel.Style = "color: #FFFFFF";
                 }
             }
             catch { } //eat it
@@ -280,16 +305,31 @@ namespace KMS2Launcher
 
         private void lbRememberPassword_TextChanged(object sender, EventArgs e)
         {
-            LauncherSettings.SetValue(LauncherSettings.REMEMBER_PASSWORD, tbRememberPassword.Text);
+            
+        }
+
+        private void lbRememberUser_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void btnSendPassword_Click(object sender, EventArgs e)
         {
+            LauncherSettings.SetValue(LauncherSettings.REMEMBER_PASSWORD, tbRememberPassword.Text);
+            LauncherSettings.SetValue(LauncherSettings.REMEMBER_USER, tbRememberUser.Text);
+
             var passwordBox = WebBrowser.Document.GetElementById("txtCPWD");
             if (passwordBox != null)
             {
                 passwordBox.Focus();
                 passwordBox.InnerText = tbRememberPassword.Text;
+            }
+
+            var userBox = WebBrowser.Document.GetElementById("txtCNexonID");
+            if (userBox != null)
+            {
+                userBox.Focus();
+                userBox.InnerText = tbRememberUser.Text;
             }
         }
 
